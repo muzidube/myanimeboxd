@@ -25,6 +25,7 @@ module.exports = {
           medium: '#ffa02a'
         },
         green: {
+          primary: '#42b983',
           medium: '#46dfcd'
         },
         pink: {
@@ -33,7 +34,9 @@ module.exports = {
         gray: {
           base: '#616161',
           background: '#fafafa',
-          primary: '#dbdbdb'
+          primary: '#98aabb',
+          highlights: '#456',
+          text: '#9ab'
         },
         black: {
           background: '#14181c'
@@ -46,6 +49,9 @@ module.exports = {
         '1em': '1em',
         '56.25%': '56.25%',
         '33%': '33%',
+        '23%': '23%',
+        '2%': '2%',
+        '950px': '950px',
         '900px': '900px',
         '600px': '600px',
         '500px': '500px',
@@ -55,7 +61,9 @@ module.exports = {
         '200px': '200px',
         '150px': '150px',
         '141px': '141px',
+        '120px': '120px',
         '94px': '94px',
+        '80px': '80px',
         '68px': '68px',
         '65px': '65px',
         '48px': '48px',
@@ -127,7 +135,15 @@ module.exports = {
       },
       backgroundImage: {
         'hero-gradient': 'linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5))',
-        'profile-gradient': 'linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4))'
+        'profile-gradient': 'linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4))',
+        'frame-gradient':
+          'linear-gradient(90deg,hsla(0,0%,100%,0) 0,hsla(0,0%,100%,.5) 50%,hsla(0,0%,100%,0))'
+      },
+      boxShadow: {
+        frame: 'inset 0 0 0 1px rgba(221,238,255,.35)'
+      },
+      backgroundSize: {
+        frame: '100% 1px'
       },
       zIndex: {
         1: '1'
