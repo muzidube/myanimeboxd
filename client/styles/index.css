@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background: #14181c;
+  color: #9ab;
+  font-family: 'Quicksand', sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+}
+@tailwind utilities;
