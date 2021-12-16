@@ -53,6 +53,8 @@ module.exports = {
         '2%': '2%',
         '950px': '950px',
         '900px': '900px',
+        '768px': '768px',
+        '640px': '640px',
         '600px': '600px',
         '500px': '500px',
         '450px': '450px',
@@ -105,6 +107,7 @@ module.exports = {
         '300px': '300px',
         '200px': '200px',
         '150px': '150px',
+        '120px': '120px',
         '2px': '2px'
       },
       borderRadius: {
@@ -131,10 +134,13 @@ module.exports = {
       backgroundPosition: {
         'top-center': 'top center',
         'right-hero': 'right -200px top',
+        'home-position': 'center 0 !important',
         '50-50': '50% 50%'
       },
       backgroundImage: {
-        'hero-gradient': 'linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5))',
+        'hero-gradient1': 'linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5))',
+        'hero-gradient2': 'linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5))',
+        'hero-gradient3': 'linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5))',
         'profile-gradient': 'linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4))',
         'frame-gradient':
           'linear-gradient(90deg,hsla(0,0%,100%,0) 0,hsla(0,0%,100%,.5) 50%,hsla(0,0%,100%,0))'
@@ -143,7 +149,8 @@ module.exports = {
         frame: 'inset 0 0 0 1px rgba(221,238,255,.35)'
       },
       backgroundSize: {
-        frame: '100% 1px'
+        frame: '100% 1px',
+        'home-hero': '100% auto'
       },
       zIndex: {
         1: '1'

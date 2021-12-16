@@ -1,9 +1,10 @@
 <template>
   <Header />
+  <Backdrop :anime="anime" />
   <div class="site-body">
-    <div class="content-wrap relative py-0 w-auto my-0 mx-auto px-4 md:px-0 md:w-950px font-normal">
-      <div class="homepage-welcome mb-14 -mt-14 text-left text-xl">
-        <div class="welcome mb-14 -mt-14 text-center">
+    <div class="content-wrap relative py-0 w-auto my-0 mx-auto px-4 lg:px-0 lg:w-950px font-normal">
+      <div class="homepage-welcome mb-14 mt-52 text-left text-xl">
+        <div class="welcome mb-14 mt-52 text-center">
           <h2 class="text-1.5em font-bold leading-none w-full m-0 p-0 box-border text-white">
             Animeboxd
           </h2>
@@ -16,15 +17,15 @@
           <h3 class="text-1em font-semibold m-0 p-0 box-border text-white">The modern way.</h3>
           <a
             class="login-link mb-14 mt-14 bg-green-primary text-white text-sm py-1em px-2em cursor-pointer border-none rounded inline-block no-underline tracking-wider uppercase"
-            >Connect with MyAnimeList</a
           >
+            Connect with MyAnimeList
+          </a>
         </div>
         <section class="shows pb-8 relative">
-          <ul class="overflow-hidden -ml-2% flex flex-wrap justify-between relative z-0 list-none">
-            <Show />
-            <Show />
-            <Show />
-            <Show />
+          <ul
+            class="overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
+          >
+            <ShowAnime :anime="anime" />
           </ul>
         </section>
         <section class="highlights pb-14 relative block">
@@ -120,14 +121,8 @@
             Just Reviewed...
           </h2>
           <ul class="overflow-hidden -ml-2% flex flex-wrap justify-between relative z-0 list-none">
-            <Show />
-            <Show />
-            <Show />
-            <Show />
-            <Show />
-            <Show />
-            <Show />
-            <Show />
+            <ShowAnime :anime="anime" />
+            <ShowAnime :anime="anime" />
           </ul>
         </section>
       </div>
@@ -139,21 +134,86 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue';
+import { defineComponent, ref } from 'vue';
 import Header from '../components/Header.vue';
-import Show from '../components/home/Show.vue';
+import ShowAnime from '../components/home/ShowAnime.vue';
+import Backdrop from '../components/home/Backdrop.vue';
+import Anime from '../types/Anime';
 
 export default defineComponent({
-  components: { Header, Show },
+  components: { Header, ShowAnime, Backdrop },
   setup() {
-    const state = reactive({
-      name: 'Link',
-      age: 25
-    });
+    let jsonObj;
+    const banana = 'banana apricot';
+    const anime = ref<Anime[]>([
+      {
+        node: {
+          id: 40834,
+          title: 'Ousama Ranking',
+          main_picture: {
+            medium: 'https://api-cdn.myanimelist.net/images/anime/1347/117616.jpg',
+            large: 'https://api-cdn.myanimelist.net/images/anime/1347/117616l.jpg'
+          }
+        },
+        ranking: { rank: 1 }
+      },
+      {
+        node: {
+          id: 45576,
+          title: 'Mushoku Tensei: Isekai Ittara Honki Dasu Part 2',
+          main_picture: {
+            medium: 'https://api-cdn.myanimelist.net/images/anime/1028/117777.jpg',
+            large: 'https://api-cdn.myanimelist.net/images/anime/1028/117777l.jpg'
+          }
+        },
+        ranking: { rank: 2 }
+      },
+      {
+        node: {
+          id: 48661,
+          title: 'JoJo no Kimyou na Bouken Part 6: Stone Ocean',
+          main_picture: {
+            medium: 'https://api-cdn.myanimelist.net/images/anime/1896/119844.jpg',
+            large: 'https://api-cdn.myanimelist.net/images/anime/1896/119844l.jpg'
+          }
+        },
+        ranking: { rank: 3 }
+      },
+      {
+        node: {
+          id: 47778,
+          title: 'Kimetsu no Yaiba: Yuukaku-hen',
+          main_picture: {
+            medium: 'https://api-cdn.myanimelist.net/images/anime/1908/120036.jpg',
+            large: 'https://api-cdn.myanimelist.net/images/anime/1908/120036l.jpg'
+          }
+        },
+        ranking: { rank: 4 }
+      }
+    ]);
+    const error = ref(null);
 
-    return {
-      ...toRefs(state)
-    };
+    // const fetchTopAiringAnime = async () => {
+    //   try {
+    //     const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/anime/top-airing`);
+    //     if (!response.ok) {
+    //       throw Error('No data available');
+    //     }
+    //     const json = await response.json();
+    //     jsonObj = await JSON.parse(json);
+    //     anime = jsonObj.data;
+    //     console.log('anime: ', anime);
+    //     console.log('jsonObj.data: ', jsonObj.data[0].node.title);
+    //     return jsonObj;
+    //   } catch (error) {
+    //     error.value = error.message;
+    //     console.log('Error: ', error.value);
+    //   }
+    // };
+
+    // fetchTopAiringAnime();
+
+    return { jsonObj, anime, error, banana };
   }
 });
 </script>
