@@ -152,4 +152,20 @@ router.get('/anime/single/:animeID', (request: any, response: any) => {
     });
 });
 
+router.get('/movieAPI/bg', (request: any, response: any) => {
+  const config = {
+    method: 'get',
+    url: `https://api.themoviedb.org/3/list/8169193?&api_key=${process.env.TMDB_API}&language=en-US`,
+    headers: {}
+  };
+
+  axios(config)
+    .then((queryResponse: any) => {
+      response.json(JSON.stringify(queryResponse.data.items));
+    })
+    .catch((error: Error) => {
+      console.log(error);
+    });
+});
+
 module.exports = router;

@@ -1,5 +1,5 @@
 <template>
-  <header className="h-10 bg-black-background py-0 px-1.5">
+  <header className="h-10 bg-black-background py-0 px-1.5 z-50 relative">
     <div className="container mx-auto max-w-screen-lg h-full">
       <div className="flex justify-between h-full px-5">
         <div className="text-gray-700 text-center flex items-center align-items cursor-pointer">

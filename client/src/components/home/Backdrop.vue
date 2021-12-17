@@ -1,27 +1,23 @@
 <template>
-  <div class="backdrop-container h-full w-auto mx-auto lg:w-950px z-0">
-    <div class="backdrop-wrapper h-full w-auto lg:w-950px absolute top-0 z-0">
+  <div
+    class="backdrop-container h-0 top-10 left-0 overflow-hidden pt-56.25% w-full absolute mx-auto z-0 lg:h-675px"
+  >
+    <div
+      class="backdrop-wrapper h-0 left-0 overflow-hidden pt-56.25% absolute top-0 z-0 lg:h-675px w-1280px lg:left-2/4 lg:transform lg:-translate-x-2/4"
+    >
       <img
-        class="backdrop-image bg-home-hero bg-home-position absolute h-full w-full bg-hero-gradient"
-        :src="anime[1].node.main_picture.large"
-        :alt="anime[0].node.title"
+        class="backdrop-image bg-home-hero bg-home-position left-0 top-0 absolute h-950px w-full lg:h-720px"
+        :src="'https://image.tmdb.org/t/p/w1280_and_h720_multi_faces' + selectBG"
+        :alt="selectBG.value"
       />
-      <div
-        class="backdrop-image bg-home-hero bg-home-position left-0 top-0 bg-no-repeat absolute h-full w-full bg-hero-gradient1"
-      />
-      <div
-        class="backdrop-image bg-home-hero bg-home-position left-0 top-0 bg-no-repeat absolute h-full w-full bg-hero-gradient2"
-      />
-      <div
-        class="backdrop-image bg-home-hero bg-home-position left-0 top-0 bg-no-repeat absolute h-full w-full bg-hero-gradient3"
-      />
+      <span class="bg-hero-gradient1 bottom-0 block left-0 absolute top-0 w-full" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['anime']
+  props: ['selectBG']
 };
 </script>
 

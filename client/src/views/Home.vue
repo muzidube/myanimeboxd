@@ -1,11 +1,11 @@
 <template>
   <Header />
-  <Backdrop :anime="anime" />
+  <Backdrop :selectBG="selectBG" />
   <div class="site-body">
     <div class="content-wrap relative py-0 w-auto my-0 mx-auto px-4 lg:px-0 lg:w-950px font-normal">
-      <div class="homepage-welcome mb-14 mt-52 text-left text-xl">
-        <div class="welcome mb-14 mt-52 text-center">
-          <h2 class="text-1.5em font-bold leading-none w-full m-0 p-0 box-border text-white">
+      <div class="homepage-welcome mb-14 mt-40 text-left text-xl">
+        <div class="welcome mb-14 mt-40 text-center">
+          <h2 class="text-1.5em font-bold leading-none w-full m-0 p-0 mb-8 box-border text-white">
             Animeboxd
           </h2>
           <h3 class="text-1em font-semibold m-0 p-0 box-border text-white">
@@ -139,81 +139,114 @@ import Header from '../components/Header.vue';
 import ShowAnime from '../components/home/ShowAnime.vue';
 import Backdrop from '../components/home/Backdrop.vue';
 import Anime from '../types/Anime';
+import useFetch from '../composables/use-fetch';
 
 export default defineComponent({
   components: { Header, ShowAnime, Backdrop },
   setup() {
     let jsonObj;
+    let bgArray: any;
+    const selectBG = ref<string>('');
+    const anime = ref<Anime[]>([]);
     const banana = 'banana apricot';
-    const anime = ref<Anime[]>([
-      {
-        node: {
-          id: 40834,
-          title: 'Ousama Ranking',
-          main_picture: {
-            medium: 'https://api-cdn.myanimelist.net/images/anime/1347/117616.jpg',
-            large: 'https://api-cdn.myanimelist.net/images/anime/1347/117616l.jpg'
-          }
-        },
-        ranking: { rank: 1 }
-      },
-      {
-        node: {
-          id: 45576,
-          title: 'Mushoku Tensei: Isekai Ittara Honki Dasu Part 2',
-          main_picture: {
-            medium: 'https://api-cdn.myanimelist.net/images/anime/1028/117777.jpg',
-            large: 'https://api-cdn.myanimelist.net/images/anime/1028/117777l.jpg'
-          }
-        },
-        ranking: { rank: 2 }
-      },
-      {
-        node: {
-          id: 48661,
-          title: 'JoJo no Kimyou na Bouken Part 6: Stone Ocean',
-          main_picture: {
-            medium: 'https://api-cdn.myanimelist.net/images/anime/1896/119844.jpg',
-            large: 'https://api-cdn.myanimelist.net/images/anime/1896/119844l.jpg'
-          }
-        },
-        ranking: { rank: 3 }
-      },
-      {
-        node: {
-          id: 47778,
-          title: 'Kimetsu no Yaiba: Yuukaku-hen',
-          main_picture: {
-            medium: 'https://api-cdn.myanimelist.net/images/anime/1908/120036.jpg',
-            large: 'https://api-cdn.myanimelist.net/images/anime/1908/120036l.jpg'
-          }
-        },
-        ranking: { rank: 4 }
-      }
-    ]);
-    const error = ref(null);
 
-    // const fetchTopAiringAnime = async () => {
-    //   try {
-    //     const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/anime/top-airing`);
-    //     if (!response.ok) {
-    //       throw Error('No data available');
-    //     }
-    //     const json = await response.json();
-    //     jsonObj = await JSON.parse(json);
-    //     anime = jsonObj.data;
-    //     console.log('anime: ', anime);
-    //     console.log('jsonObj.data: ', jsonObj.data[0].node.title);
-    //     return jsonObj;
-    //   } catch (error) {
-    //     error.value = error.message;
-    //     console.log('Error: ', error.value);
-    //   }
+    // const anime1 = async () => {
+    //   const { response, fetchData } = useFetch(
+    //     `${process.env.VUE_APP_BACKEND_URL}/anime/top-airing`,
+    //     {}
+    //   );
+    //   console.log('LOOK AT THIS: ', response);
+    //   fetchData();
+    //   anime.value = response;
     // };
 
-    // fetchTopAiringAnime();
+    // anime1();
+    // const anime = computed(() => {});
+    // const anime = ref<Anime[]>([
+    //   {
+    //     node: {
+    //       id: 40834,
+    //       title: 'Ousama Ranking',
+    //       main_picture: {
+    //         medium: 'https://api-cdn.myanimelist.net/images/anime/1347/117616.jpg',
+    //         large: 'https://api-cdn.myanimelist.net/images/anime/1347/117616l.jpg'
+    //       }
+    //     },
+    //     ranking: { rank: 1 }
+    //   },
+    //   {
+    //     node: {
+    //       id: 45576,
+    //       title: 'Mushoku Tensei: Isekai Ittara Honki Dasu Part 2',
+    //       main_picture: {
+    //         medium: 'https://api-cdn.myanimelist.net/images/anime/1028/117777.jpg',
+    //         large: 'https://api-cdn.myanimelist.net/images/anime/1028/117777l.jpg'
+    //       }
+    //     },
+    //     ranking: { rank: 2 }
+    //   },
+    //   {
+    //     node: {
+    //       id: 48661,
+    //       title: 'JoJo no Kimyou na Bouken Part 6: Stone Ocean',
+    //       main_picture: {
+    //         medium: 'https://api-cdn.myanimelist.net/images/anime/1896/119844.jpg',
+    //         large: 'https://api-cdn.myanimelist.net/images/anime/1896/119844l.jpg'
+    //       }
+    //     },
+    //     ranking: { rank: 3 }
+    //   },
+    //   {
+    //     node: {
+    //       id: 47778,
+    //       title: 'Kimetsu no Yaiba: Yuukaku-hen',
+    //       main_picture: {
+    //         medium: 'https://api-cdn.myanimelist.net/images/anime/1908/120036.jpg',
+    //         large: 'https://api-cdn.myanimelist.net/images/anime/1908/120036l.jpg'
+    //       }
+    //     },
+    //     ranking: { rank: 4 }
+    //   }
+    // ]);
+    // const error = ref(null);
 
-    return { jsonObj, anime, error, banana };
+    const fetchTopAiringAnime = async () => {
+      try {
+        const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/anime/top-airing`);
+        if (!response.ok) {
+          throw Error('No data available');
+        }
+        const json = await response.json();
+        jsonObj = await JSON.parse(json);
+        anime.value = jsonObj.data.splice(0, 4);
+        console.log('Anime Array: ', anime.value);
+      } catch (error) {
+        error.value = error.message;
+        console.log('Error: ', error.value);
+      }
+    };
+
+    fetchTopAiringAnime();
+
+    const getHomeBG = async () => {
+      try {
+        await fetch(`${process.env.VUE_APP_BACKEND_URL}/movieAPI/bg`)
+          .then((res) => res.json())
+          .then((res) => JSON.parse(res))
+          .then((data) => {
+            bgArray = data.map((a: any) => a.backdrop_path);
+          });
+      } catch (error) {
+        error.value = error.message;
+        console.log('Error: ', error.value);
+      }
+      selectBG.value = await bgArray[Math.floor(Math.random() * bgArray.length)];
+      console.log(selectBG);
+    };
+
+    getHomeBG();
+
+    return { jsonObj, anime, banana, selectBG };
   }
 });
 </script>

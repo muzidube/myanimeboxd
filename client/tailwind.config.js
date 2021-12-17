@@ -51,9 +51,13 @@ module.exports = {
         '33%': '33%',
         '23%': '23%',
         '2%': '2%',
+        '1500px': '1500px',
+        '1280px': '1280px',
         '950px': '950px',
         '900px': '900px',
         '768px': '768px',
+        '720px': '720px',
+        '675px': '675px',
         '640px': '640px',
         '600px': '600px',
         '500px': '500px',
@@ -88,6 +92,7 @@ module.exports = {
       maxWidth: {
         '6/12': '50%',
         '1em': '1em',
+        '950px': '950px',
         '600px': '600px',
         '300px': '300px',
         '200px': '200px',
@@ -138,9 +143,10 @@ module.exports = {
         '50-50': '50% 50%'
       },
       backgroundImage: {
-        'hero-gradient1': 'linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5))',
-        'hero-gradient2': 'linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5))',
-        'hero-gradient3': 'linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5))',
+        'hero-gradient1':
+          'linear-gradient(180deg,rgba(20,24,28,0) 0,rgba(20,24,28,0) 50%,rgba(20,24,28,.75) 75%,#14181c)',
+        'hero-gradient2': 'linear-gradient(to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3))',
+        'hero-gradient3': 'linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3))',
         'profile-gradient': 'linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4))',
         'frame-gradient':
           'linear-gradient(90deg,hsla(0,0%,100%,0) 0,hsla(0,0%,100%,.5) 50%,hsla(0,0%,100%,0))'

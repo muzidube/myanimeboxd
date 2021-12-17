@@ -134,5 +134,19 @@ router.get('/anime/single/:animeID', (request, response) => {
         console.log(error);
     });
 });
+router.get('/movieAPI/bg', (request, response) => {
+    const config = {
+        method: 'get',
+        url: `https://api.themoviedb.org/3/list/8169193?&api_key=${process.env.TMDB_API}&language=en-US`,
+        headers: {}
+    };
+    axios(config)
+        .then((queryResponse) => {
+        response.json(JSON.stringify(queryResponse.data.items));
+    })
+        .catch((error) => {
+        console.log(error);
+    });
+});
 module.exports = router;
 //# sourceMappingURL=anime.js.map
