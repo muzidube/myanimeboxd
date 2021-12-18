@@ -64,7 +64,7 @@
                   />
                 </svg>
               </span>
-              <p class="text-gray-primary ml-3 py-auto text-base text-left">
+              <p class="text-gray-primary ml-3 py-auto text-base text-left flex items-center">
                 Keep track of all the anime you've ever watched or just start from the day you join.
               </p>
             </li>
@@ -85,7 +85,7 @@
                   />
                 </svg>
               </span>
-              <p class="text-gray-primary ml-3 py-auto text-base text-left">
+              <p class="text-gray-primary ml-3 py-auto text-base text-left flex items-center">
                 View and edit your MyAnimeList lists.
               </p>
             </li>
@@ -104,7 +104,7 @@
                   />
                 </svg>
               </span>
-              <p class="text-gray-primary ml-3 py-auto text-base text-left">
+              <p class="text-gray-primary ml-3 py-auto text-base text-left flex items-center">
                 Read reviews and find out about the best new anime.
               </p>
             </li>

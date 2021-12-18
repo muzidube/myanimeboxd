@@ -3,7 +3,7 @@
     class="backdrop-container h-0 top-10 left-0 overflow-hidden pt-56.25% w-full absolute mx-auto z-0 lg:h-675px"
   >
     <div
-      class="backdrop-wrapper h-0 left-0 overflow-hidden pt-56.25% absolute top-0 z-0 lg:h-675px w-full lg:left-2/4 lg:transform lg:-translate-x-2/4"
+      class="backdrop-wrapper h-0 left-0 overflow-hidden pt-56.25% absolute top-0 z-0 w-full max-w-1200px lg:h-675px lg:left-2/4 lg:transform lg:-translate-x-2/4"
     >
       <img
         class="backdrop-image bg-home-hero bg-home-position left-0 top-0 absolute w-full lg:h-1080px"
