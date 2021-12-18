@@ -13,7 +13,6 @@ router.get('/anime/top-airing', (request, response) => {
     };
     axios(config)
         .then((popularResponse) => {
-        console.log(JSON.stringify(popularResponse.data));
         response.json(JSON.stringify(popularResponse.data));
     })
         .catch((error) => {
@@ -46,7 +45,6 @@ router.get('/anime/top-all', (request, response) => {
     };
     axios(config)
         .then((popularResponse) => {
-        console.log(JSON.stringify(popularResponse.data));
         response.json(JSON.stringify(popularResponse.data));
     })
         .catch((error) => {

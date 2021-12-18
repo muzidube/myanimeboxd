@@ -22,4 +22,18 @@ body {
   border: 0;
   font-size: 100%;
 }
+
+@media only screen and (max-width: 860px) {
+  .top-row-anime:nth-child(5) {
+    display: none;
+  }
+  .bottom-row-anime:nth-child(5) {
+    display: none;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .top-row-anime:nth-child(6) {
+    display: none;
+  }
+}
 @tailwind utilities;

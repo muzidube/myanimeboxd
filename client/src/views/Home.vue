@@ -1,10 +1,10 @@
 <template>
   <Header />
   <Backdrop :selectBG="selectBG" />
-  <div class="site-body">
+  <div class="site-body pt-15%">
     <div class="content-wrap relative py-0 w-auto my-0 mx-auto px-4 lg:px-0 lg:w-950px font-normal">
-      <div class="homepage-welcome mb-14 mt-40 text-left text-xl">
-        <div class="welcome mb-14 mt-40 text-center">
+      <div class="homepage-welcome mb-8 mt-18% text-left text-xl">
+        <div class="welcome mb-0 mt-18% text-center">
           <h2 class="text-1.5em font-bold leading-none w-full m-0 p-0 mb-8 box-border text-white">
             Animeboxd
           </h2>
@@ -23,12 +23,18 @@
         </div>
         <section class="shows pb-8 relative">
           <ul
-            class="overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
+            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
           >
-            <ShowAnime :anime="anime" />
+            <li
+              v-for="anime in anime"
+              :key="anime.node.id"
+              className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% md:ml-2.5 w-23% md:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
+            >
+              <Anime2 :anime="anime" />
+            </li>
           </ul>
         </section>
-        <section class="highlights pb-14 relative block">
+        <section class="highlights pb-6 relative block">
           <h2 class="tagline text-base tracking-wider mt-5 mb-2.5 uppercase">
             Animeboxd lets you...
           </h2>
@@ -80,7 +86,7 @@
                 </svg>
               </span>
               <p class="text-gray-primary ml-3 py-auto text-base text-left">
-                Show some love for your favourite anime with a "like".
+                View and edit your MyAnimeList lists.
               </p>
             </li>
             <li
@@ -90,125 +96,68 @@
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-12 w-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="#98aabb"
+                  viewBox="0 0 20 20"
+                  fill="#98aabb"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                   />
                 </svg>
               </span>
               <p class="text-gray-primary ml-3 py-auto text-base text-left">
-                Keep track of all the anime you've ever watched or just start from the day you join.
+                Read reviews and find out about the best new anime.
               </p>
             </li>
           </ul>
         </section>
-        <section class="anime-list relative pb-9">
+        <section class="anime-list relative pb-2">
           <h2
             class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
           >
-            Just Reviewed...
+            This Seasons Anime...
           </h2>
-          <ul class="overflow-hidden -ml-2% flex flex-wrap justify-between relative z-0 list-none">
-            <ShowAnime :anime="anime" />
-            <ShowAnime :anime="anime" />
+          <ul
+            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
+          >
+            <li
+              v-for="seasonAnime in seasonAnime.splice(0, 5)"
+              :key="seasonAnime.node.id"
+              className="bottom-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% md:ml-2.5 w-23% md:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
+            >
+              <Anime2 :anime="seasonAnime" />
+            </li>
+          </ul>
+          <ul
+            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
+          >
+            <li
+              v-for="seasonAnime in seasonAnime"
+              :key="seasonAnime.node.id"
+              className="bottom-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% md:ml-2.5 w-23% md:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
+            >
+              <Anime2 :anime="seasonAnime" />
+            </li>
           </ul>
         </section>
       </div>
     </div>
-    <h1>Can this just fucking work?</h1>
-    <h1>{{ name }}</h1>
-    <h1>{{ age }}</h1>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import Header from '../components/Header.vue';
-import ShowAnime from '../components/home/ShowAnime.vue';
 import Backdrop from '../components/home/Backdrop.vue';
+import Anime2 from '../components/home/Anime2.vue';
 import Anime from '../types/Anime';
-import useFetch from '../composables/use-fetch';
 
 export default defineComponent({
-  components: { Header, ShowAnime, Backdrop },
+  components: { Header, Backdrop, Anime2 },
   setup() {
-    let jsonObj;
     let bgArray: any;
     const selectBG = ref<string>('');
     const anime = ref<Anime[]>([]);
-    const banana = 'banana apricot';
-
-    // const anime1 = async () => {
-    //   const { response, fetchData } = useFetch(
-    //     `${process.env.VUE_APP_BACKEND_URL}/anime/top-airing`,
-    //     {}
-    //   );
-    //   console.log('LOOK AT THIS: ', response);
-    //   fetchData();
-    //   anime.value = response;
-    // };
-
-    // anime1();
-    // const anime = computed(() => {});
-    // const anime = ref<Anime[]>([
-    //   {
-    //     node: {
-    //       id: 40834,
-    //       title: 'Ousama Ranking',
-    //       main_picture: {
-    //         medium: 'https://api-cdn.myanimelist.net/images/anime/1347/117616.jpg',
-    //         large: 'https://api-cdn.myanimelist.net/images/anime/1347/117616l.jpg'
-    //       }
-    //     },
-    //     ranking: { rank: 1 }
-    //   },
-    //   {
-    //     node: {
-    //       id: 45576,
-    //       title: 'Mushoku Tensei: Isekai Ittara Honki Dasu Part 2',
-    //       main_picture: {
-    //         medium: 'https://api-cdn.myanimelist.net/images/anime/1028/117777.jpg',
-    //         large: 'https://api-cdn.myanimelist.net/images/anime/1028/117777l.jpg'
-    //       }
-    //     },
-    //     ranking: { rank: 2 }
-    //   },
-    //   {
-    //     node: {
-    //       id: 48661,
-    //       title: 'JoJo no Kimyou na Bouken Part 6: Stone Ocean',
-    //       main_picture: {
-    //         medium: 'https://api-cdn.myanimelist.net/images/anime/1896/119844.jpg',
-    //         large: 'https://api-cdn.myanimelist.net/images/anime/1896/119844l.jpg'
-    //       }
-    //     },
-    //     ranking: { rank: 3 }
-    //   },
-    //   {
-    //     node: {
-    //       id: 47778,
-    //       title: 'Kimetsu no Yaiba: Yuukaku-hen',
-    //       main_picture: {
-    //         medium: 'https://api-cdn.myanimelist.net/images/anime/1908/120036.jpg',
-    //         large: 'https://api-cdn.myanimelist.net/images/anime/1908/120036l.jpg'
-    //       }
-    //     },
-    //     ranking: { rank: 4 }
-    //   }
-    // ]);
-    // const error = ref(null);
+    const seasonAnime = ref<Anime[]>([]);
 
     const fetchTopAiringAnime = async () => {
       try {
@@ -217,9 +166,10 @@ export default defineComponent({
           throw Error('No data available');
         }
         const json = await response.json();
-        jsonObj = await JSON.parse(json);
-        anime.value = jsonObj.data.splice(0, 4);
-        console.log('Anime Array: ', anime.value);
+        const jsonObj = await JSON.parse(json);
+        anime.value = jsonObj.data.slice(0, 6);
+        console.log('json object: ', jsonObj.data);
+        console.log('Top Anime Array: ', anime.value);
       } catch (error) {
         error.value = error.message;
         console.log('Error: ', error.value);
@@ -227,6 +177,25 @@ export default defineComponent({
     };
 
     fetchTopAiringAnime();
+
+    const fetchThisSeasonAnime = async () => {
+      try {
+        const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/anime/winter`);
+        if (!response.ok) {
+          throw Error('No data available');
+        }
+        const json = await response.json();
+        const jsonObj = await JSON.parse(json);
+        seasonAnime.value = jsonObj.data;
+        console.log('json object: ', jsonObj.data);
+        console.log('Season Anime Array: ', seasonAnime.value);
+      } catch (error) {
+        error.value = error.message;
+        console.log('Error: ', error.value);
+      }
+    };
+
+    fetchThisSeasonAnime();
 
     const getHomeBG = async () => {
       try {
@@ -246,7 +215,7 @@ export default defineComponent({
 
     getHomeBG();
 
-    return { jsonObj, anime, banana, selectBG };
+    return { anime, seasonAnime, selectBG };
   }
 });
 </script>
