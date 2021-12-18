@@ -16,7 +16,7 @@
           </h3>
           <h3 class="text-1em font-semibold m-0 p-0 box-border text-white">The modern way.</h3>
           <a
-            class="login-link mb-14 mt-14 bg-green-primary text-white text-sm py-1em px-2em cursor-pointer border-none rounded inline-block no-underline tracking-wider uppercase"
+            class="login-link mb-14 mt-14 bg-green-animeboxd text-white text-sm py-1em px-2em cursor-pointer border-none rounded inline-block no-underline tracking-wider uppercase"
           >
             Connect with MyAnimeList
           </a>

@@ -26,7 +26,8 @@ module.exports = {
         },
         green: {
           primary: '#42b983',
-          medium: '#46dfcd'
+          medium: '#46dfcd',
+          animeboxd: '#00c030'
         },
         pink: {
           medium: '#ff7ece'
@@ -59,6 +60,7 @@ module.exports = {
         '768px': '768px',
         '720px': '720px',
         '675px': '675px',
+        '670px': '670px',
         '640px': '640px',
         '600px': '600px',
         '500px': '500px',
@@ -121,7 +123,8 @@ module.exports = {
         '18%': '18%'
       },
       padding: {
-        '15%': '15%'
+        '15%': '15%',
+        '50%': '50%'
       },
       borderRadius: {
         '50%': '50%'
