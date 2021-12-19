@@ -1,13 +1,12 @@
 <template>
   <router-link :to="'/anime/' + anime.node.id + '/' + anime.node.title">
-    <!-- <Link to={`/Movie/${id}/${title}`}> -->
     <div
       className="image shadow-md rounded-lg w-full h-full md:h-225px overflow-hidden bg-black-background whitespace-nowrap"
     >
       <div className="wrapper w-full h-full relative top-0 left-0 inline-block whitespace-nowrap">
         <p className="image inline-block w-full h-full whitespace-nowrap" :title="anime.node.title">
           <img
-            className="poster inline-block w-full h-full outline-none border-none
+            className="poster inline-block w-full h-full min-h-125px outline-none border-none
           bg-black-background"
             onError="{addDefaultSrc}"
             :src="anime.node.main_picture.medium"

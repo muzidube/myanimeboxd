@@ -37,7 +37,8 @@ module.exports = {
           background: '#fafafa',
           primary: '#98aabb',
           highlights: '#456',
-          text: '#9ab'
+          text: '#9ab',
+          text2: '#ddeeff'
         },
         black: {
           background: '#14181c'
@@ -116,6 +117,7 @@ module.exports = {
         '300px': '300px',
         '200px': '200px',
         '150px': '150px',
+        '125px': '125px',
         '120px': '120px',
         '2px': '2px'
       },
@@ -143,7 +145,11 @@ module.exports = {
         '0.6em': '0.6em',
         '0.4rem': '0.4rem'
       },
-      fontFamily: {},
+      fontFamily: {
+        quicksand: "'Quicksand', sans-serif",
+        comfortaa: "'Comfortaa', serif;",
+        garamond: "'EB Garamond', serif;"
+      },
       strokeWidth: {
         '10s': '10'
       },

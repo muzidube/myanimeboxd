@@ -1,12 +1,14 @@
 <template>
   <Header />
-  <Backdrop :selectBG="selectBG" />
+  <Backdrop :animeBackground="animeBackground" />
   <div class="site-body pt-15%">
     <div class="content-wrap relative py-0 w-auto my-0 mx-auto px-4 lg:px-0 lg:w-950px font-normal">
       <div class="homepage-welcome mb-8 mt-18% text-left text-xl">
         <div class="welcome mb-0 mt-18% text-center">
-          <h2 class="text-1.5em font-bold leading-none w-full m-0 p-0 mb-8 box-border text-white">
-            Animeboxd
+          <h2
+            class="text-1.5em font-bold leading-none w-full m-0 p-0 mb-8 box-border text-white font-comfortaa"
+          >
+            animeboxd
           </h2>
           <h3 class="text-1em font-semibold m-0 p-0 box-border text-white">
             Connect with MyAnimeList.
@@ -146,7 +148,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import Header from '../components/Header.vue';
+import Header from '../components/home/header/Header.vue';
 import Backdrop from '../components/home/Backdrop.vue';
 import Anime2 from '../components/home/Anime2.vue';
 import Anime from '../types/Anime';
@@ -154,9 +156,9 @@ import Anime from '../types/Anime';
 export default defineComponent({
   components: { Header, Backdrop, Anime2 },
   setup() {
-    let bgArray: any;
-    const selectBG = ref<string>('');
-    const anime = ref<Anime[]>([]);
+    let bgArray: [];
+    const animeBackground = ref<string>('');
+    const anime = ref<Anime[] | null>(null);
     const seasonAnime = ref<Anime[]>([]);
 
     const fetchTopAiringAnime = async () => {
@@ -209,13 +211,13 @@ export default defineComponent({
         error.value = error.message;
         console.log('Error: ', error.value);
       }
-      selectBG.value = await bgArray[Math.floor(Math.random() * bgArray.length)];
-      console.log(selectBG);
+      const animeBackgroundUrl = await bgArray[Math.floor(Math.random() * bgArray.length)];
+      animeBackground.value = `https://image.tmdb.org/t/p/w1920_and_h1080_multi_faces${animeBackgroundUrl}`;
     };
 
     getHomeBG();
 
-    return { anime, seasonAnime, selectBG };
+    return { anime, seasonAnime, animeBackground };
   }
 });
 </script>
