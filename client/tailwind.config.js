@@ -37,6 +37,7 @@ module.exports = {
           background: '#fafafa',
           primary: '#98aabb',
           highlights: '#456',
+          resultBorder: '#2c3440',
           text: '#9ab',
           text2: '#ddeeff'
         },

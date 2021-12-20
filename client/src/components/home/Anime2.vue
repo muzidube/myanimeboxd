@@ -30,10 +30,12 @@
   </router-link>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   props: ['anime']
-};
+});
 </script>
 
 <style></style>

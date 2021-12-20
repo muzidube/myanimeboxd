@@ -148,7 +148,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import Header from '../components/home/header/Header.vue';
+import Header from '../components/header/Header.vue';
 import Backdrop from '../components/home/Backdrop.vue';
 import Anime2 from '../components/home/Anime2.vue';
 import Anime from '../types/Anime';

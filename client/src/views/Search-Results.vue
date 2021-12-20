@@ -1,25 +1,85 @@
 <template>
-  <div class="content pt-4 pb-10">
-    <div class="content-wrap px-4 w-auto my-0 mx-auto text-left">
-      <div class="overflow-visible">
-        <span class="block" />
-        <section class="py-0 float-none w-auto overflow-visible relative block">
+  <Header />
+  <div v-if="anime">
+    <div class="content pt-4 pb-10">
+      <div class="content-wrap px-4 w-auto my-0 mx-auto text-left">
+        <div class="overflow-visible">
           <span class="block" />
-          <h2
-            class="results-number tracking-wide border-b border-gray-highlights mb-3 pb-1 uppercase"
-          >
-            Number of results
-          </h2>
-          <section class="filters"></section>
-          <ul class="search-results-list -mt-1 list-none"></ul>
-        </section>
+          <section class="py-0 float-none w-auto overflow-visible relative block">
+            <span class="block" />
+            <h2
+              class="results-number tracking-wide border-b border-gray-highlights mb-3 pb-1 uppercase"
+            >
+              Search results...
+            </h2>
+            <section class="filters"></section>
+            <ul class="search-results-list -mt-1 list-none">
+              <li
+                v-for="anime in anime"
+                :key="anime.node.id"
+                class="overflow-hidden py-4 border-b border-gray-resultBorder mb-3 pb-1"
+              >
+                <Result :anime="anime" />
+              </li>
+            </ul>
+          </section>
+        </div>
       </div>
     </div>
   </div>
+  <div v-else class="min-v-screen min-h-screen flex items-center justify-center">
+    <p>Loading...</p>
+  </div>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import Header from '../components/header/Header.vue';
+import Result from '../components/search-page/Result.vue';
+import Anime from '../types/Anime';
+
+export default defineComponent({
+  components: { Header, Result },
+  setup() {
+    const route = useRoute();
+    const anime = ref<Anime[] | null>(null);
+    const fetchTopAiringAnime = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.VUE_APP_BACKEND_URL}/anime/search/${route.params.searchQuery}`
+        );
+        if (!response.ok) {
+          throw Error('No data available');
+        }
+        const json = await response.json();
+        const jsonObj = await JSON.parse(json);
+        anime.value = jsonObj.data;
+        console.log('json object: ', jsonObj.data);
+        console.log('Search Results Array: ', anime.value);
+      } catch (error) {
+        error.value = error.message;
+        console.log('Error: ', error.value);
+      }
+    };
+    fetchTopAiringAnime();
+
+    const toggleSynopsis = () => {
+      const shortSynopsis = document.querySelector('.short-synopsis') || null;
+      const fullSynopsis = document.querySelector('.full-synopsis') || null;
+
+      if (fullSynopsis && shortSynopsis && fullSynopsis.classList.contains('hidden')) {
+        shortSynopsis.classList.add('hidden');
+        fullSynopsis.classList.remove('hidden');
+      } else if (fullSynopsis && shortSynopsis && shortSynopsis.classList.contains('hidden')) {
+        shortSynopsis.classList.remove('hidden');
+        fullSynopsis.classList.add('hidden');
+      }
+    };
+
+    return { anime, toggleSynopsis };
+  }
+});
 </script>
 
 <style></style>

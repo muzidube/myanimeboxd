@@ -119,7 +119,7 @@ router.get('/anime/single/:animeID', (request, response) => {
     const id = request.params.animeID;
     const config = {
         method: 'get',
-        url: `https://api.myanimelist.net/v2/anime/${id}?fields=id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,rank,popularity,num_list_users,num_scoring_users,nsfw,created_at,updated_at,media_type,status,genres,my_list_status,num_episodes,start_season,broadcast,source,average_episode_duration,rating,pictures,background,related_anime,related_manga,recommendations,studios,statistics`,
+        url: `https://api.myanimelist.net/v2/anime/${id}?fields=id,title,main_picture,synopsis,mean,rank,num_episodes,start_season,related_anime,related_manga,recommendations,studios,statistics`,
         headers: {
             'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID
         }
@@ -127,6 +127,23 @@ router.get('/anime/single/:animeID', (request, response) => {
     axios(config)
         .then((popularResponse) => {
         response.json(JSON.stringify(popularResponse.data));
+    })
+        .catch((error) => {
+        console.log(error);
+    });
+});
+router.get('/anime/search/:searchQuery', (request, response) => {
+    const query = request.params.searchQuery;
+    const config = {
+        method: 'get',
+        url: `https://api.myanimelist.net/v2/anime?q=${query}&fields=id,title,main_picture,synopsis,rank,num_episodes,start_season,studios`,
+        headers: {
+            'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID
+        }
+    };
+    axios(config)
+        .then((searchResponse) => {
+        response.json(JSON.stringify(searchResponse.data));
     })
         .catch((error) => {
         console.log(error);
