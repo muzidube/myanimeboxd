@@ -83,7 +83,7 @@ export default defineComponent({
 
       if (searchBar && !searchBar.classList.contains('visible')) {
         searchBar.classList.add('visible');
-      } else {
+      } else if (searchBar && searchBar.classList.contains('visible')) {
         searchBar.classList.remove('visible');
       }
     };
