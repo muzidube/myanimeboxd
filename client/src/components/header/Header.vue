@@ -32,26 +32,64 @@
                 </div>
               </div> -->
 
-          <div>
+          <div class="h-full flex items-center">
             <!-- <router-link :to={ROUTES.LOGIN}> -->
-            <button type="button" className="font-bold text-sm rounded text-white w-20 h-8">
+            <button type="button" class="font-bold text-sm rounded text-white w-20 h-full">
               Log In
             </button>
             <!-- </router-link> -->
             <!-- <router-link :to={ROUTES.SIGN_UP}> -->
-            <button type="button" className="font-bold text-sm rounded text-black w-20 h-8">
+            <button type="button" class="font-bold text-sm rounded text-white w-20 h-full">
               Sign Up
+            </button>
+            <button
+              type="button"
+              class="font-bold text-sm rounded text-white w-auto h-auto ml-3 mb-1"
+              @click="toggleSearchBar"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
             </button>
             <!-- </router-link> -->
           </div>
         </div>
       </div>
     </div>
+    <SearchBar />
   </header>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent } from 'vue';
+import SearchBar from './SearchBar.vue';
+
+export default defineComponent({
+  components: { SearchBar },
+  setup() {
+    const toggleSearchBar = () => {
+      const searchBar = document.querySelector('.anime-searchbar-form') || null;
+
+      if (searchBar && !searchBar.classList.contains('visible')) {
+        searchBar.classList.add('visible');
+      } else {
+        searchBar.classList.remove('visible');
+      }
+    };
+    return { toggleSearchBar };
+  }
+});
 </script>
 
 <style></style>

@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import Header from '../components/header/Header.vue';
 import Result from '../components/search-page/Result.vue';
@@ -43,11 +43,12 @@ export default defineComponent({
   components: { Header, Result },
   setup() {
     const route = useRoute();
+    const searchValue = ref(route.params.searchQuery);
     const anime = ref<Anime[] | null>(null);
-    const fetchTopAiringAnime = async () => {
+    const searchAnime = async () => {
       try {
         const response = await fetch(
-          `${process.env.VUE_APP_BACKEND_URL}/anime/search/${route.params.searchQuery}`
+          `${process.env.VUE_APP_BACKEND_URL}/anime/search/${searchValue.value}`
         );
         if (!response.ok) {
           throw Error('No data available');
@@ -55,14 +56,17 @@ export default defineComponent({
         const json = await response.json();
         const jsonObj = await JSON.parse(json);
         anime.value = jsonObj.data;
-        console.log('json object: ', jsonObj.data);
-        console.log('Search Results Array: ', anime.value);
       } catch (error) {
         error.value = error.message;
         console.log('Error: ', error.value);
       }
     };
-    fetchTopAiringAnime();
+    searchAnime();
+
+    watch(route, () => {
+      searchValue.value = route.params.searchQuery;
+      searchAnime();
+    });
 
     const toggleSynopsis = () => {
       const shortSynopsis = document.querySelector('.short-synopsis') || null;

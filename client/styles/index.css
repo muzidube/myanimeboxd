@@ -30,6 +30,26 @@ body {
   flex-shrink: 0;
 }
 
+.anime-searchbar-form {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-2em);
+  z-index: -1;
+  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+}
+
+.anime-searchbar-form.visible {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+  transform: translateY(0%);
+  transition-delay: 0s, 0s, 0.3s;
+}
+
 @media only screen and (max-width: 860px) {
   .top-row-anime:nth-child(5) {
     display: none;

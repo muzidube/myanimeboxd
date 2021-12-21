@@ -90,8 +90,10 @@ module.exports = {
         '600px': '600px',
         '300px': '300px',
         '200px': '200px',
+        '160px': '160px',
         '150px': '150px',
         '140px': '140px',
+        '120px': '120px',
         '46px': '46px'
       },
       maxWidth: {

@@ -53,7 +53,7 @@
     </div>
     <p class="release-year text-sm leading-5 mt-1.5 mb-1 uppercase tracking-wider">Studio</p>
     <div class="anime-studio text-base leading-5 mb-1 font-black capitalize">
-      {{ anime.node.studios[0].name }}
+      {{ anime.node.studios[0].name || 'thn' }}
     </div>
   </div>
 </template>

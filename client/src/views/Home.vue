@@ -170,8 +170,6 @@ export default defineComponent({
         const json = await response.json();
         const jsonObj = await JSON.parse(json);
         anime.value = jsonObj.data.slice(0, 6);
-        console.log('json object: ', jsonObj.data);
-        console.log('Top Anime Array: ', anime.value);
       } catch (error) {
         error.value = error.message;
         console.log('Error: ', error.value);
@@ -189,8 +187,6 @@ export default defineComponent({
         const json = await response.json();
         const jsonObj = await JSON.parse(json);
         seasonAnime.value = jsonObj.data;
-        console.log('json object: ', jsonObj.data);
-        console.log('Season Anime Array: ', seasonAnime.value);
       } catch (error) {
         error.value = error.message;
         console.log('Error: ', error.value);

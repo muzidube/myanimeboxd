@@ -2,15 +2,17 @@
   <Header />
   <div v-if="anime">
     <Backdrop :animeBackground="anime.main_picture.large" />
-    <span class="block pt-50% w-full" />
-    <div class="content-wrap relative py-0 px-4 w-auto my-0 mx-auto text-left">
+    <span class="block pt-50% w-full sm:pt-80" />
+    <div
+      class="content-wrap relative py-0 px-4 w-auto my-0 mx-auto text-left bg-black-background lg:w-950px"
+    >
       <div class="anime-page-wrapper overflow-visible">
         <span class="block" />
-        <div class="inline overflow-visible lg:float-right lg:w-670px">
+        <div class="inline overflow-visible sm:flex sm:float-right">
           <span class="block" />
-          <section class="featured-anime-header mb-4 -mt-2 flex lg:block">
+          <section class="featured-anime-header mb-4 -mt-2 flex sm:block sm:w-2/6">
             <div
-              class="anime-page-poster-wrap self-start order-2 overflow-visible w-2/6 relative z-0"
+              class="anime-page-poster-wrap self-start order-2 overflow-visible w-2/6 min-w-120px sm:min-w-200px relative z-0"
             >
               <div
                 class="poster-container h-auto w-full rounded inline-block overflow-hidden shadow relative bg-black"
@@ -55,10 +57,33 @@
               </div>
             </div>
           </section>
-          <section class="anime-synopsis float-none w-auto overflow-visible p-0 relative block">
+          <section
+            class="anime-synopsis float-none w-auto overflow-visible p-0 relative block sm:ml-10"
+          >
             <span class="block" />
             <section class="block">
               <div class="mb-0 overflow-hidden text-base leading-6 font-garamond font-semibold">
+                <div class="flex items-center h-8">
+                  <h1
+                    class="anime-title text-2xl m-0 text-white font-garamond font-extrabold h-full hidden sm:flex sm:items-center sm:m-0"
+                  >
+                    {{ anime.title }}
+                  </h1>
+                  <p
+                    class="release-year text-sm leading-5 mt-1.5 mb-1 uppercase tracking-wider font-quicksand h-full hidden sm:flex sm:items-center sm:m-0 sm:ml-6 sm:text-base"
+                  >
+                    <a>
+                      {{ `${anime.start_season.year} ` }}
+                    </a>
+                    <span class="bullet mx-3">·</span>
+                    Studio
+                  </p>
+                  <div
+                    class="anime-studio text-base leading-5 mb-1 font-black capitalize font-quicksand h-full hidden sm:flex sm:items-center sm:m-0 sm:ml-6"
+                  >
+                    {{ anime.studios[0].name }}
+                  </div>
+                </div>
                 <h4 class="-mt-1 font-quicksand tracking-widest uppercase font-normal mb-1">
                   Synopsis
                 </h4>
