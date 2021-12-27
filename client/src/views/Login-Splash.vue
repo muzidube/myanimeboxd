@@ -24,58 +24,112 @@
 import { defineComponent, ref } from 'vue';
 import Header from '../components/header/Header.vue';
 import Backdrop from '../components/home/Backdrop.vue';
+import User from '../types/User';
 
 export default defineComponent({
   components: { Header, Backdrop },
   setup() {
     let bgArray: [];
+    const user = ref<User | null>(null);
     const animeBackground = ref<string>('');
     const verifier = localStorage.getItem('mal-verifier');
-    console.log('verifier: ', verifier);
 
-    const checkUser = async () => {
+    console.log('Access Token: ', localStorage.getItem('mal-access-token'));
+
+    const updateUserValues = async () => {
       try {
-        const url1 = window.location.href.split('code=');
-        if (url1.length === 2 && localStorage) {
-          const url2 = url1[1].split('&');
-          console.log(url2[0]);
-          const response = await fetch(
-            `${process.env.VUE_APP_BACKEND_URL}/anime/${url2[0]}/${verifier}`
+        if (localStorage.getItem('mal-access-token')) {
+          const token = localStorage.getItem('mal-access-token');
+          const userResponse = await fetch(
+            `${process.env.VUE_APP_BACKEND_URL}/anime/user-details/${token}`
           );
-          if (!response.ok) {
+
+          if (!userResponse.ok) {
             throw Error('No user data available');
           }
-          const json = await response.json();
-          const jsonObj = await JSON.parse(json);
-          console.log('jsonObj', jsonObj);
-          if (localStorage.getItem('mal-access-token')) {
-            localStorage.removeItem('mal-access-token');
-            localStorage.setItem('mal-access-token', jsonObj.access_token);
-          } else {
-            localStorage.setItem('mal-access-token', jsonObj.access_token);
-          }
-          if (localStorage.getItem('mal-refresh-token')) {
-            localStorage.removeItem('mal-refresh-token');
-            localStorage.setItem('mal-refresh-token', jsonObj.refresh_token);
-          } else {
-            localStorage.setItem('mal-refresh-token', jsonObj.refresh_token);
-          }
-          if (localStorage.getItem('mal-refresh-token')) {
-            localStorage.removeItem('mal-refresh-token');
-            localStorage.setItem('mal-refresh-token', jsonObj.refresh_token);
-          } else {
-            localStorage.setItem('mal-refresh-token', jsonObj.refresh_token);
-          }
+          const jsonUser = await userResponse.json();
+          const jsonObjUser = await JSON.parse(jsonUser);
+          console.log('jsonObjUser', userResponse);
+          // if (localStorage.getItem('mal-user-id')) {
+          //   localStorage.removeItem('mal-user-id');
+          //   localStorage.setItem('mal-user-id', jsonObjUser.id);
+          // } else {
+          //   localStorage.setItem('mal-user-id', jsonObjUser.id);
+          // }
+          // if (localStorage.getItem('mal-user-username')) {
+          //   localStorage.removeItem('mal-user-username');
+          //   localStorage.setItem('mal-user-username', jsonObjUser.name);
+          // } else {
+          //   localStorage.setItem('mal-user-username', jsonObjUser.name);
+          // }
 
-          window.location = process.env.VUE_APP_HOMEPAGE;
+          // if (localStorage.getItem('mal-user-username')) {
+          //   console.log('mal-user-username');
+          // }
         }
+
+        // const userValues = {
+        //   id: jsonObjUser.id,
+        //   username: jsonObjUser.name,
+        //   access_token: jsonObj.access_token,
+        //   refresh_token: jsonObj.refresh_token
+        // };
+
+        // user.value = userValues;
+
+        // console.log('jabroni');
+        // console.log('userValues: ', userValues);
+
+        //   window.open('http://localhost:8080', '_self');
       } catch (error) {
         error.value = error.message;
         console.log('Error: ', error.value);
       }
     };
 
-    checkUser();
+    // const getUser = async () => {
+    //   try {
+    //     const url1 = window.location.href.split('code=');
+
+    //     if (url1.length === 2 && localStorage.getItem('mal-verifier')) {
+    //       const url2 = url1[1].split('&');
+    //       const response = await fetch(
+    //         `${process.env.VUE_APP_BACKEND_URL}/anime/${url2[0]}/${verifier}`
+    //       );
+    //       if (!response.ok) {
+    //         throw Error('No user data available');
+    //       }
+    //       const json = await response.json();
+    //       const jsonObj = await JSON.parse(json);
+    //       console.log('jsonObj', jsonObj);
+    //       if (localStorage.getItem('mal-access-token')) {
+    //         localStorage.removeItem('mal-access-token');
+    //         localStorage.setItem('mal-access-token', jsonObj.access_token);
+    //       } else {
+    //         localStorage.setItem('mal-access-token', jsonObj.access_token);
+    //       }
+    //       if (localStorage.getItem('mal-refresh-token')) {
+    //         localStorage.removeItem('mal-refresh-token');
+    //         localStorage.setItem('mal-refresh-token', jsonObj.refresh_token);
+    //       } else {
+    //         localStorage.setItem('mal-refresh-token', jsonObj.refresh_token);
+    //       }
+    //       if (localStorage.getItem('mal-refresh-token')) {
+    //         localStorage.removeItem('mal-refresh-token');
+    //         localStorage.setItem('mal-refresh-token', jsonObj.refresh_token);
+    //       } else {
+    //         localStorage.setItem('mal-refresh-token', jsonObj.refresh_token);
+    //       }
+
+    //       updateUserValues();
+    //     }
+    //   } catch (error) {
+    //     error.value = error.message;
+    //     console.log('Error: ', error.value);
+    //   }
+    // };
+
+    // getUser();
 
     const getHomeBG = async () => {
       try {
@@ -95,7 +149,31 @@ export default defineComponent({
 
     getHomeBG();
 
-    return { animeBackground };
+    const test = async () => {
+      try {
+        if (localStorage.getItem('mal-access-token')) {
+          const token = localStorage.getItem('mal-access-token');
+          console.log('token: ', token);
+          const userResponse = await fetch(
+            `${process.env.VUE_APP_BACKEND_URL}/anime/user-details/${token}`
+          );
+
+          if (!userResponse.ok) {
+            throw Error('No user data available');
+          }
+          const jsonUser = await userResponse.json();
+          const jsonObjUser = await JSON.parse(jsonUser);
+          console.log('jsonObjUser', jsonObjUser);
+        }
+      } catch (error) {
+        error.value = error.message;
+        console.log('Error: ', error.value);
+      }
+    };
+
+    test();
+
+    return { animeBackground, user };
   }
 });
 </script>

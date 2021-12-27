@@ -251,7 +251,8 @@ export default defineComponent({
         localStorage.setItem('mal-verifier', verifier);
       }
       window.open(
-        `https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.VUE_APP_X_MAL_CLIENT_ID}&code_challenge=${verifier}&state=RequestID42`
+        `https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.VUE_APP_X_MAL_CLIENT_ID}&code_challenge=${verifier}&state=RequestID42`,
+        '_self'
       );
     };
 
