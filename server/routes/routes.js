@@ -1,8 +1,9 @@
 "use strict";
 const express1 = require('express');
-require('dotenv').config();
 const axios = require('axios');
+const qs = require('qs');
 const router = express1.Router();
+require('dotenv').config();
 router.get('/anime/top-airing', (request, response) => {
     const config = {
         method: 'get',
@@ -158,6 +159,34 @@ router.get('/movieAPI/bg', (request, response) => {
     axios(config)
         .then((queryResponse) => {
         response.json(JSON.stringify(queryResponse.data.items));
+    })
+        .catch((error) => {
+        console.log(error);
+    });
+});
+router.get('/anime/:code/:verifier', (request, response) => {
+    const { code } = request.params;
+    const { verifier } = request.params;
+    const data = qs.stringify({
+        client_id: process.env.X_MAL_CLIENT_ID,
+        client_secret: process.env.X_MAL_CLIENT_SECRET,
+        grant_type: 'authorization_code',
+        code,
+        code_verifier: verifier
+    });
+    const config = {
+        method: 'post',
+        url: 'https://myanimelist.net/v1/oauth2/token',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Cookie: 'MALHLOGSESSID=870226fa50510c0408b4d7f6ef6b185f; MALSESSIONID=jo7f9j3mceap8m4i5hh2tcqrn3'
+        },
+        data
+    };
+    axios(config)
+        .then((checkResponse) => {
+        console.log(JSON.stringify(checkResponse.data));
+        response.json(JSON.stringify(checkResponse.data));
     })
         .catch((error) => {
         console.log(error);

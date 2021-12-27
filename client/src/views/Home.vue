@@ -18,13 +18,12 @@
             Track anime you've watched.
           </h3>
           <h3 class="text-1em font-semibold m-0 p-0 box-border text-white">The modern way.</h3>
-          <a
+          <button
             class="login-link mb-14 mt-14 bg-green-animeboxd text-white text-sm py-1em px-2em cursor-pointer border-none rounded inline-block no-underline tracking-wider uppercase"
-            :href="URL"
-            target="_blank"
+            @click="saveVerifier"
           >
             Connect with MyAnimeList
-          </a>
+          </button>
         </div>
         <section class="shows pb-8 relative">
           <ul
@@ -244,9 +243,22 @@ export default defineComponent({
 
     URL.value = `https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.VUE_APP_X_MAL_CLIENT_ID}&code_challenge=${verifier}&state=RequestID42`;
 
-    console.log('Verifier: ', verifier);
+    const saveVerifier = () => {
+      if (localStorage.getItem('mal-verifier')) {
+        localStorage.removeItem('mal-verifier');
+        localStorage.setItem('mal-verifier', verifier);
+      } else {
+        localStorage.setItem('mal-verifier', verifier);
+      }
+      window.open(
+        `https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.VUE_APP_X_MAL_CLIENT_ID}&code_challenge=${verifier}&state=RequestID42`
+      );
+    };
 
-    return { anime, seasonAnime, animeBackground, URL };
+    console.log('Verifier: ', verifier);
+    console.log('Document Referrer: ', window.performance.navigation.type);
+
+    return { anime, seasonAnime, animeBackground, URL, saveVerifier };
   }
 });
 </script>
