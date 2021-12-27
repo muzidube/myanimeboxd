@@ -183,10 +183,51 @@ router.get('/anime/:code/:verifier', (request, response) => {
         },
         data
     };
+    const fetchUserDetails = async () => {
+        try {
+            const checkResponse = await axios(config);
+            const accessToken = JSON.stringify(checkResponse.data.access_token);
+            const refreshToken = JSON.stringify(checkResponse.data.refresh_token);
+            console.log('This is the Access Token: ', accessToken.replace(/^"|"$/g, ''));
+            const tokenConfig = {
+                method: 'get',
+                url: 'https://api.myanimelist.net/v2/users/@me?fields=anime_statistics',
+                headers: {
+                    Authorization: `Bearer ${accessToken.replace(/^"|"$/g, '')}`
+                }
+            };
+            const userResponse = await axios(tokenConfig);
+            const userId = JSON.stringify(userResponse.data.id);
+            const username = JSON.stringify(userResponse.data.name);
+            const user = {
+                id: parseInt(userId, 10),
+                username: username.replace(/^"|"$/g, ''),
+                access_token: accessToken.replace(/^"|"$/g, ''),
+                refresh_token: refreshToken.replace(/^"|"$/g, '')
+            };
+            console.log(user);
+            return response.json(user);
+        }
+        catch (error) {
+            console.log('error: ', error);
+        }
+    };
+    fetchUserDetails();
+});
+router.get('/anime/user-details/:tokenThing', (request, response) => {
+    const token = request.params.tokenThing;
+    const config = {
+        method: 'get',
+        url: 'https://api.myanimelist.net/v2/users/@me?fields=anime_statistics',
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+    console.log(config);
     axios(config)
-        .then((checkResponse) => {
-        console.log(JSON.stringify(checkResponse.data));
-        response.json(JSON.stringify(checkResponse.data));
+        .then((userResponse) => {
+        console.log(JSON.stringify(token));
+        response.json(JSON.stringify(userResponse.data));
     })
         .catch((error) => {
         console.log(error);

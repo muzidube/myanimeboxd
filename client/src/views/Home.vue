@@ -155,6 +155,7 @@ import Backdrop from '../components/home/Backdrop.vue';
 import Anime2 from '../components/home/Anime2.vue';
 import Anime from '../types/Anime';
 import { verifier } from '../code-thing';
+import isUser from '../context/user';
 
 export default defineComponent({
   components: { Header, Backdrop, Anime2 },
@@ -163,6 +164,7 @@ export default defineComponent({
     const URL = ref<string | null>(null);
     const animeBackground = ref<string>('');
     const anime = ref<Anime[] | null>(null);
+    const user = ref(false);
     const seasonAnime = ref<Anime[]>([]);
 
     const fetchTopAiringAnime = async () => {
@@ -199,30 +201,6 @@ export default defineComponent({
 
     fetchThisSeasonAnime();
 
-    const checkUser = async () => {
-      try {
-        const url1 = window.location.href.split('code=');
-        if (url1.length === 2 && localStorage) {
-          const url2 = url1[1].split('&');
-          console.log(url2[0]);
-          const response = await fetch(
-            `${process.env.VUE_APP_BACKEND_URL}/anime/${url2[0]}/${verifier}`
-          );
-          if (!response.ok) {
-            throw Error('No data available');
-          }
-          const json = await response.json();
-          const jsonObj = await JSON.parse(json);
-          seasonAnime.value = jsonObj.data;
-        }
-      } catch (error) {
-        error.value = error.message;
-        console.log('Error: ', error.value);
-      }
-    };
-
-    checkUser();
-
     const getHomeBG = async () => {
       try {
         await fetch(`${process.env.VUE_APP_BACKEND_URL}/movieAPI/bg`)
@@ -256,10 +234,9 @@ export default defineComponent({
       );
     };
 
-    console.log('Verifier: ', verifier);
-    console.log('Document Referrer: ', window.performance.navigation.type);
+    isUser(user);
 
-    return { anime, seasonAnime, animeBackground, URL, saveVerifier };
+    return { anime, seasonAnime, animeBackground, URL, saveVerifier, user };
   }
 });
 </script>

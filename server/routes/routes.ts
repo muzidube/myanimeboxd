@@ -198,6 +198,7 @@ router.get('/anime/:code/:verifier', (request: any, response: any) => {
     code,
     code_verifier: verifier
   });
+
   const config = {
     method: 'post',
     url: 'https://myanimelist.net/v1/oauth2/token',
@@ -209,10 +210,55 @@ router.get('/anime/:code/:verifier', (request: any, response: any) => {
     data
   };
 
+  const fetchUserDetails = async () => {
+    try {
+      const checkResponse = await axios(config);
+      const accessToken = JSON.stringify(checkResponse.data.access_token);
+      const refreshToken = JSON.stringify(checkResponse.data.refresh_token);
+
+      const tokenConfig = {
+        method: 'get',
+        url: 'https://api.myanimelist.net/v2/users/@me?fields=anime_statistics',
+        headers: {
+          Authorization: `Bearer ${accessToken.replace(/^"|"$/g, '')}`
+        }
+      };
+
+      const userResponse = await axios(tokenConfig);
+      const userId = JSON.stringify(userResponse.data.id);
+      const username = JSON.stringify(userResponse.data.name);
+      const user = {
+        id: parseInt(userId, 10),
+        username: username.replace(/^"|"$/g, ''),
+        access_token: accessToken.replace(/^"|"$/g, ''),
+        refresh_token: refreshToken.replace(/^"|"$/g, '')
+      };
+
+      return response.json(user);
+    } catch (error) {
+      console.log('error: ', error);
+    }
+  };
+
+  fetchUserDetails();
+});
+
+router.get('/anime/user-details/:tokenThing', (request: any, response: any) => {
+  const token = request.params.tokenThing;
+  const config = {
+    method: 'get',
+    url: 'https://api.myanimelist.net/v2/users/@me?fields=anime_statistics',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  console.log(config);
+
   axios(config)
-    .then((checkResponse: any) => {
-      console.log(JSON.stringify(checkResponse.data));
-      response.json(JSON.stringify(checkResponse.data));
+    .then((userResponse: any) => {
+      console.log(JSON.stringify(token));
+      response.json(JSON.stringify(userResponse.data));
     })
     .catch((error: Error) => {
       console.log(error);
