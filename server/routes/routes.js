@@ -164,4 +164,4 @@ router.get('/movieAPI/bg', (request, response) => {
     });
 });
 module.exports = router;
-//# sourceMappingURL=anime.js.map
+//# sourceMappingURL=routes.js.map

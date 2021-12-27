@@ -13,10 +13,10 @@
     "baseUrl": ".",
     "types": ["express", "node"],
     "paths": {
-      "@/*": ["*", "api/*"]
+      "@/*": ["*", "routes/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "include": ["**/*.ts", "api/**/*.ts", "**/*.tsx", "**/*.vue", "api"],
+  "include": ["**/*.ts", "routes/**/*.ts", "**/*.tsx", "**/*.vue", "routes"],
   "exclude": ["node_modules"]
 }

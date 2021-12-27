@@ -13,9 +13,6 @@
       <span
         class="bg-hero-gradient4 bottom-0 block left-0 absolute top-0 w-full lg:h-675px lg:left-2/4 lg:transform lg:-translate-x-2/4"
       />
-      <span
-        class="bg-hero-gradient5 bottom-0 block left-0 absolute top-0 w-full lg:h-300px lg:left-2/4 lg:transform lg:-translate-x-2/4"
-      />
     </div>
   </div>
 </template>

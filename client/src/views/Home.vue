@@ -1,6 +1,7 @@
 <template>
   <Header />
   <Backdrop :animeBackground="animeBackground" />
+
   <div class="site-body pt-15%">
     <div class="content-wrap relative py-0 w-auto my-0 mx-auto px-4 lg:px-0 lg:w-950px font-normal">
       <div class="homepage-welcome mb-8 mt-18% text-left text-xl">
@@ -19,6 +20,8 @@
           <h3 class="text-1em font-semibold m-0 p-0 box-border text-white">The modern way.</h3>
           <a
             class="login-link mb-14 mt-14 bg-green-animeboxd text-white text-sm py-1em px-2em cursor-pointer border-none rounded inline-block no-underline tracking-wider uppercase"
+            :href="URL"
+            target="_blank"
           >
             Connect with MyAnimeList
           </a>
@@ -152,11 +155,13 @@ import Header from '../components/header/Header.vue';
 import Backdrop from '../components/home/Backdrop.vue';
 import Anime2 from '../components/home/Anime2.vue';
 import Anime from '../types/Anime';
+import { verifier } from '../code-thing';
 
 export default defineComponent({
   components: { Header, Backdrop, Anime2 },
   setup() {
     let bgArray: [];
+    const URL = ref<string | null>(null);
     const animeBackground = ref<string>('');
     const anime = ref<Anime[] | null>(null);
     const seasonAnime = ref<Anime[]>([]);
@@ -195,6 +200,30 @@ export default defineComponent({
 
     fetchThisSeasonAnime();
 
+    const checkUser = async () => {
+      try {
+        const url1 = window.location.href.split('code=');
+        if (url1.length === 2 && localStorage) {
+          const url2 = url1[1].split('&');
+          console.log(url2[0]);
+          const response = await fetch(
+            `${process.env.VUE_APP_BACKEND_URL}/anime/${url2[0]}/${verifier}`
+          );
+          if (!response.ok) {
+            throw Error('No data available');
+          }
+          const json = await response.json();
+          const jsonObj = await JSON.parse(json);
+          seasonAnime.value = jsonObj.data;
+        }
+      } catch (error) {
+        error.value = error.message;
+        console.log('Error: ', error.value);
+      }
+    };
+
+    checkUser();
+
     const getHomeBG = async () => {
       try {
         await fetch(`${process.env.VUE_APP_BACKEND_URL}/movieAPI/bg`)
@@ -213,7 +242,11 @@ export default defineComponent({
 
     getHomeBG();
 
-    return { anime, seasonAnime, animeBackground };
+    URL.value = `https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.VUE_APP_X_MAL_CLIENT_ID}&code_challenge=${verifier}&state=RequestID42`;
+
+    console.log('Verifier: ', verifier);
+
+    return { anime, seasonAnime, animeBackground, URL };
   }
 });
 </script>

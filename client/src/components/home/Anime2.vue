@@ -1,7 +1,7 @@
 <template>
   <router-link :to="'/anime/' + anime.node.id + '/' + anime.node.title">
     <div
-      className="image shadow-md rounded-lg w-full h-full md:h-225px overflow-hidden bg-black-background whitespace-nowrap"
+      className="image shadow-md rounded-lg w-full h-full max-h-225px md:h-225px overflow-hidden bg-black-background whitespace-nowrap"
     >
       <div className="wrapper w-full h-full relative top-0 left-0 inline-block whitespace-nowrap">
         <p className="image inline-block w-full h-full whitespace-nowrap" :title="anime.node.title">
