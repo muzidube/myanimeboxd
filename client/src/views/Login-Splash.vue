@@ -40,7 +40,9 @@ export default defineComponent({
 
         if (url1.length === 2 && localStorage.getItem('mal-verifier')) {
           const url2 = url1[1].split('&');
-          const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/${url2[0]}/${verifier}`);
+          const response = await fetch(
+            `${process.env.VUE_APP_BACKEND_URL}/user/${url2[0]}/${verifier}`
+          );
           if (!response.ok) {
             throw Error('No user data available');
           }

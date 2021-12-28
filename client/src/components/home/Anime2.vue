@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="'/' + anime.node.id + '/' + anime.node.title">
+  <router-link :to="'/anime/' + anime.node.id + '/' + anime.node.title">
     <div
       className="image shadow-md rounded-lg w-full h-full max-h-225px md:h-225px overflow-hidden bg-black-background whitespace-nowrap"
     >

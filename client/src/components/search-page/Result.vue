@@ -14,7 +14,7 @@
   <div class="anime-details ml-24 w-auto float-none">
     <h2 class="font-garamond font-normal text-2xl text-white leading-5 h-auto">
       <span class="mr-1">
-        <router-link :to="'/' + anime.node.id + '/' + anime.node.title">
+        <router-link :to="'/anime/' + anime.node.id + '/' + anime.node.title">
           <h1
             class="anime-title text-2xl mb-1 text-white font-garamond font-extrabold leading-none"
           >
