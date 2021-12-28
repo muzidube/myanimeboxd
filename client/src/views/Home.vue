@@ -25,6 +25,42 @@
             Connect with MyAnimeList
           </button>
         </div>
+        <div v-if="user" class="welcome mb-0 mt-18% text-center">
+          <h1
+            class="text-2xl leading-none w-full m-0 p-0 mb-8 box-border text-white font-comfortaa"
+          >
+            Welcome back, {{ user.username }}.
+          </h1>
+        </div>
+        <section v-if="user" class="anime-list relative pb-2">
+          <h2
+            class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+          >
+            Suggested Anime...
+          </h2>
+          <ul
+            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
+          >
+            <li
+              v-for="seasonAnime in seasonAnime.splice(0, 5)"
+              :key="seasonAnime.node.id"
+              className="bottom-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% md:ml-2.5 w-23% md:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
+            >
+              <Anime2 :anime="seasonAnime" />
+            </li>
+          </ul>
+          <ul
+            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
+          >
+            <li
+              v-for="seasonAnime in seasonAnime"
+              :key="seasonAnime.node.id"
+              className="bottom-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% md:ml-2.5 w-23% md:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
+            >
+              <Anime2 :anime="seasonAnime" />
+            </li>
+          </ul>
+        </section>
         <section class="shows pb-8 relative">
           <ul
             class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
@@ -150,6 +186,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import axios from 'axios';
+
 import Header from '../components/header/Header.vue';
 import Backdrop from '../components/home/Backdrop.vue';
 import Anime2 from '../components/home/Anime2.vue';
@@ -161,6 +199,7 @@ import User from '../types/User';
 export default defineComponent({
   components: { Header, Backdrop, Anime2 },
   setup() {
+    const baloney = ref('baloney');
     let bgArray: [];
     const loginUrl = ref<string | null>(null);
     const animeBackground = ref<string>('');
@@ -171,7 +210,7 @@ export default defineComponent({
 
     const fetchTopAiringAnime = async () => {
       try {
-        const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/anime/top-airing`);
+        const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/top-airing`);
         if (!response.ok) {
           throw Error('No data available');
         }
@@ -188,7 +227,7 @@ export default defineComponent({
 
     const fetchThisSeasonAnime = async () => {
       try {
-        const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/anime/winter`);
+        const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/winter`);
         if (!response.ok) {
           throw Error('No data available');
         }
@@ -241,6 +280,25 @@ export default defineComponent({
       user.value = JSON.parse(localStorage.getItem('user') || '{}');
     }
 
+    const fetchSuggestedAnime = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.VUE_APP_BACKEND_URL}/suggested/eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjAyM2NjN2YyOWRjZWY5NDE2MTJlMWY5ODRlY2Q0MDg4OGUyNGViOThmMDkyYmUwZjIyYjE5MDAxMWU0NWI0MGRjODU4ZGMzNDJlMGUwZmNmIn0.eyJhdWQiOiI3MjNlZDc2MjQ3ZjAwMzY0ZDczYzE2NjkwYTg1ODBjMSIsImp0aSI6IjAyM2NjN2YyOWRjZWY5NDE2MTJlMWY5ODRlY2Q0MDg4OGUyNGViOThmMDkyYmUwZjIyYjE5MDAxMWU0NWI0MGRjODU4ZGMzNDJlMGUwZmNmIiwiaWF0IjoxNjQwNjExNTQxLCJuYmYiOjE2NDA2MTE1NDEsImV4cCI6MTY0MzI4OTk0MSwic3ViIjoiMTI0MjkyMjMiLCJzY29wZXMiOltdfQ.G17W3RqnwmryNH47eSE2Hemz6bRCnY-GxhnyzwMldtBcj_lhyZSOoulBTxkjx2UXKhqJwvxBxGo5o_mUOIrVDhbSDR8Ao8i9xugGqVWd7NL85FisiOVA3yPQd2K1AYjMWJb7n6iUORWw4VxROTmzF2_2jxUN5KsB9B4Pf36KEk6gawXy5sZBDr_3VNB6IQ-sNOc6CttxlgTNdSxeTK1OD48b7IRDkcOeqyPnrnu4mgLS3yJYI9K8j1HsDSZmMb-b1ljxTDuvTP-DG833e1e_OPKXVwQs9Ztoca8zEzcfqw2IEa1XfH5lawK5Lz-fAaG0PzND9t6_9L5DrFUGegqesg`
+        );
+        console.log('WHAT THE FUCK');
+        if (!response.ok) {
+          throw Error('No data available');
+        }
+        const json = await response.json();
+        const jsonObj = await JSON.parse(json);
+        console.log(jsonObj.data);
+      } catch (error) {
+        error.value = error.message;
+        console.log('Error: ', error.value);
+      }
+    };
+
+    fetchSuggestedAnime();
     return { anime, seasonAnime, animeBackground, loginUrl, saveVerifier, user, verifier };
   }
 });

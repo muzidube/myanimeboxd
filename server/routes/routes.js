@@ -4,7 +4,7 @@ const axios = require('axios');
 const qs = require('qs');
 const router = express1.Router();
 require('dotenv').config();
-router.get('/anime/top-airing', (request, response) => {
+router.get('/top-airing', (request, response) => {
     const config = {
         method: 'get',
         url: "https://api.myanimelist.net/v2/anime/ranking?ranking_type=airing&limit=10'",
@@ -20,7 +20,7 @@ router.get('/anime/top-airing', (request, response) => {
         console.log(error);
     });
 });
-router.get('/anime/top-upcoming', (request, response) => {
+router.get('/top-upcoming', (request, response) => {
     const config = {
         method: 'get',
         url: "https://api.myanimelist.net/v2/anime/ranking?ranking_type=upcoming&limit=10'",
@@ -36,7 +36,7 @@ router.get('/anime/top-upcoming', (request, response) => {
         console.log(error);
     });
 });
-router.get('/anime/top-all', (request, response) => {
+router.get('/top-all', (request, response) => {
     const config = {
         method: 'get',
         url: "https://api.myanimelist.net/v2/anime/ranking?ranking_type=all&limit=10'",
@@ -52,7 +52,7 @@ router.get('/anime/top-all', (request, response) => {
         console.log(error);
     });
 });
-router.get('/anime/winter', (request, response) => {
+router.get('/winter', (request, response) => {
     const config = {
         method: 'get',
         url: "https://api.myanimelist.net/v2/anime/season/2017/winter?limit=10'",
@@ -68,7 +68,7 @@ router.get('/anime/winter', (request, response) => {
         console.log(error);
     });
 });
-router.get('/anime/spring', (request, response) => {
+router.get('/spring', (request, response) => {
     const config = {
         method: 'get',
         url: "https://api.myanimelist.net/v2/anime/season/2017/spring?limit=10'",
@@ -84,7 +84,7 @@ router.get('/anime/spring', (request, response) => {
         console.log(error);
     });
 });
-router.get('/anime/summer', (request, response) => {
+router.get('/summer', (request, response) => {
     const config = {
         method: 'get',
         url: "https://api.myanimelist.net/v2/anime/season/2017/summer?limit=10'",
@@ -100,7 +100,7 @@ router.get('/anime/summer', (request, response) => {
         console.log(error);
     });
 });
-router.get('/anime/fall', (request, response) => {
+router.get('/fall', (request, response) => {
     const config = {
         method: 'get',
         url: "https://api.myanimelist.net/v2/anime/season/2017/fall?limit=10'",
@@ -116,7 +116,7 @@ router.get('/anime/fall', (request, response) => {
         console.log(error);
     });
 });
-router.get('/anime/single/:animeID', (request, response) => {
+router.get('/single/:animeID', (request, response) => {
     const id = request.params.animeID;
     const config = {
         method: 'get',
@@ -133,8 +133,9 @@ router.get('/anime/single/:animeID', (request, response) => {
         console.log(error);
     });
 });
-router.get('/anime/search/:searchQuery', (request, response) => {
+router.get('/search/:searchQuery', (request, response) => {
     const query = request.params.searchQuery;
+    console.log(request.params);
     const config = {
         method: 'get',
         url: `https://api.myanimelist.net/v2/anime?q=${query}&fields=id,title,main_picture,synopsis,rank,num_episodes,start_season,studios`,
@@ -164,7 +165,7 @@ router.get('/movieAPI/bg', (request, response) => {
         console.log(error);
     });
 });
-router.get('/anime/:code/:verifier', (request, response) => {
+router.get('/:code/:verifier', (request, response) => {
     const { code } = request.params;
     const { verifier } = request.params;
     const data = qs.stringify({
@@ -207,23 +208,26 @@ router.get('/anime/:code/:verifier', (request, response) => {
             return response.json(user);
         }
         catch (error) {
-            console.log('error: ', error);
+            // console.log('error: ', error);
         }
     };
     fetchUserDetails();
 });
-router.get('/anime/user-details/:tokenThing', (request, response) => {
-    const token = request.params.tokenThing;
+router.get('/suggested/:token', (request, response) => {
+    const { token } = request.params;
+    console.log('request params: ', request.params.token);
     const config = {
         method: 'get',
-        url: 'https://api.myanimelist.net/v2/users/@me?fields=anime_statistics',
+        url: 'https://api.myanimelist.net/v2/anime/suggestions?limit=6',
         headers: {
+            client_id: process.env.X_MAL_CLIENT_ID,
             Authorization: `Bearer ${token}`
         }
     };
     axios(config)
-        .then((userResponse) => {
-        response.json(JSON.stringify(userResponse.data));
+        .then((suggestedResponse) => {
+        console.log(JSON.stringify(suggestedResponse.data));
+        response.json(JSON.stringify(suggestedResponse.data));
     })
         .catch((error) => {
         console.log(error);

@@ -39,7 +39,7 @@ export default defineComponent({
 
     const onSubmit = (e: any) => {
       e.preventDefault();
-      router.push(`/search/anime/${searchQuery.value}`);
+      router.push(`/search/${searchQuery.value}`);
     };
 
     return { searchQuery, changeHandler, onSubmit };

@@ -48,7 +48,7 @@ export default defineComponent({
     const searchAnime = async () => {
       try {
         const response = await fetch(
-          `${process.env.VUE_APP_BACKEND_URL}/anime/search/${searchValue.value}`
+          `${process.env.VUE_APP_BACKEND_URL}/search/${searchValue.value}`
         );
         if (!response.ok) {
           throw Error('No data available');

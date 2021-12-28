@@ -154,7 +154,7 @@ export default defineComponent({
     const fetchTopAiringAnime = async () => {
       try {
         const response = await fetch(
-          `${process.env.VUE_APP_BACKEND_URL}/anime/single/${route.params.id}`
+          `${process.env.VUE_APP_BACKEND_URL}/single/${route.params.id}`
         );
         if (!response.ok) {
           throw Error('No data available');
