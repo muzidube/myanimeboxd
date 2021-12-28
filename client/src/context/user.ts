@@ -1,8 +1,8 @@
-export default function isUser(user: any) {
-  if (localStorage.getItem('userId')) {
-    user.value = true;
-    return user;
+export default function isUser(userCheck: any) {
+  if (localStorage.getItem('user')) {
+    userCheck.value = true;
+    return userCheck;
   }
-  user.value = false;
-  return user;
+  userCheck.value = false;
+  return userCheck;
 }

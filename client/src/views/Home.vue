@@ -1,11 +1,11 @@
 <template>
-  <Header />
+  <Header :loginUrl="loginUrl" :verifier="verifier" />
   <Backdrop :animeBackground="animeBackground" />
 
   <div class="site-body pt-15%">
     <div class="content-wrap relative py-0 w-auto my-0 mx-auto px-4 lg:px-0 lg:w-950px font-normal">
       <div class="homepage-welcome mb-8 mt-18% text-left text-xl">
-        <div class="welcome mb-0 mt-18% text-center">
+        <div v-if="!user" class="welcome mb-0 mt-18% text-center">
           <h2
             class="text-1.5em font-bold leading-none w-full m-0 p-0 mb-8 box-border text-white font-comfortaa"
           >
@@ -156,15 +156,17 @@ import Anime2 from '../components/home/Anime2.vue';
 import Anime from '../types/Anime';
 import { verifier } from '../code-thing';
 import isUser from '../context/user';
+import User from '../types/User';
 
 export default defineComponent({
   components: { Header, Backdrop, Anime2 },
   setup() {
     let bgArray: [];
-    const URL = ref<string | null>(null);
+    const loginUrl = ref<string | null>(null);
     const animeBackground = ref<string>('');
     const anime = ref<Anime[] | null>(null);
-    const user = ref(false);
+    const userCheck = ref(false);
+    const user = ref<User | null>(null);
     const seasonAnime = ref<Anime[]>([]);
 
     const fetchTopAiringAnime = async () => {
@@ -219,7 +221,7 @@ export default defineComponent({
 
     getHomeBG();
 
-    URL.value = `https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.VUE_APP_X_MAL_CLIENT_ID}&code_challenge=${verifier}&state=RequestID42`;
+    loginUrl.value = `https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.VUE_APP_X_MAL_CLIENT_ID}&code_challenge=${verifier}&state=RequestID42`;
 
     const saveVerifier = () => {
       if (localStorage.getItem('mal-verifier')) {
@@ -234,9 +236,12 @@ export default defineComponent({
       );
     };
 
-    isUser(user);
+    isUser(userCheck);
+    if (userCheck.value) {
+      user.value = JSON.parse(localStorage.getItem('user') || '{}');
+    }
 
-    return { anime, seasonAnime, animeBackground, URL, saveVerifier, user };
+    return { anime, seasonAnime, animeBackground, loginUrl, saveVerifier, user, verifier };
   }
 });
 </script>

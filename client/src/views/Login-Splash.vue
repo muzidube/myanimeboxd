@@ -48,8 +48,8 @@ export default defineComponent({
           }
           const json = await response.json();
           user.value = json;
-          console.log('User:', json.id);
-          localStorage.setItem('userId', json.id);
+          localStorage.setItem('user', JSON.stringify(json));
+          window.open('http://localhost:8080/', '_self');
         }
       } catch (error) {
         error.value = error.message;
@@ -76,12 +76,6 @@ export default defineComponent({
     };
 
     getHomeBG();
-
-    if (user.value) {
-      console.log('There is a user');
-    } else {
-      console.log('There is no user');
-    }
 
     return { animeBackground, user };
   }

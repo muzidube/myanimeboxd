@@ -162,8 +162,6 @@ export default defineComponent({
         const json = await response.json();
         const jsonObj = await JSON.parse(json);
         anime.value = jsonObj;
-        console.log('json object: ', jsonObj);
-        console.log('Top Anime Array: ', anime.value);
       } catch (error) {
         error.value = error.message;
         console.log('Error: ', error.value);

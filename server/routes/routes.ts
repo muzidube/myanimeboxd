@@ -253,11 +253,8 @@ router.get('/anime/user-details/:tokenThing', (request: any, response: any) => {
     }
   };
 
-  console.log(config);
-
   axios(config)
     .then((userResponse: any) => {
-      console.log(JSON.stringify(token));
       response.json(JSON.stringify(userResponse.data));
     })
     .catch((error: Error) => {

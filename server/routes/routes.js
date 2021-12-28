@@ -188,7 +188,6 @@ router.get('/anime/:code/:verifier', (request, response) => {
             const checkResponse = await axios(config);
             const accessToken = JSON.stringify(checkResponse.data.access_token);
             const refreshToken = JSON.stringify(checkResponse.data.refresh_token);
-            console.log('This is the Access Token: ', accessToken.replace(/^"|"$/g, ''));
             const tokenConfig = {
                 method: 'get',
                 url: 'https://api.myanimelist.net/v2/users/@me?fields=anime_statistics',
@@ -205,7 +204,6 @@ router.get('/anime/:code/:verifier', (request, response) => {
                 access_token: accessToken.replace(/^"|"$/g, ''),
                 refresh_token: refreshToken.replace(/^"|"$/g, '')
             };
-            console.log(user);
             return response.json(user);
         }
         catch (error) {
@@ -223,10 +221,8 @@ router.get('/anime/user-details/:tokenThing', (request, response) => {
             Authorization: `Bearer ${token}`
         }
     };
-    console.log(config);
     axios(config)
         .then((userResponse) => {
-        console.log(JSON.stringify(token));
         response.json(JSON.stringify(userResponse.data));
     })
         .catch((error) => {
