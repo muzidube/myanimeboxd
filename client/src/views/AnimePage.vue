@@ -70,7 +70,7 @@
               <select
                 name="Lists"
                 @change="onChangeList($event)"
-                class="form-control text-center flex justify-between min-w-90px whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic"
+                class="form-control text-center flex justify-between w-full mr-2 whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic font-bold"
                 :value="listValue || '0'"
               >
                 <option value="0">Lists</option>
@@ -84,7 +84,7 @@
               <select
                 name="Score"
                 @change="onChangeScore($event)"
-                class="form-control text-center flex justify-between min-w-90px whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic"
+                class="form-control text-center flex justify-between w-full mx-2 whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic font-bold"
                 :value="scoreValue || '0'"
               >
                 <option :value="0">Score</option>
@@ -100,7 +100,7 @@
                 <option :value="1">1</option>
               </select>
               <div
-                class="episodes-watched text-left no-underline align-middle inline-block py-2 px-3 whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic h-10"
+                class="episodes-watched text-left no-underline align-middle inline-block py-2 px-3 whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic h-10 font-bold w-full ml-2"
               >
                 Eps:
                 <input
@@ -108,7 +108,7 @@
                   name="watched-episodes"
                   id="watched-episodes"
                   @change="onChangeEpisode($event)"
-                  class="w-12 bg-gray-button text-right mr-1"
+                  class="w-10 bg-gray-button text-right mr-1 font-bold"
                   :value="episodeValue || null"
                 />/
                 <span class="m-0 p-0 whitespace-nowrap">{{ anime.num_episodes }}</span>
@@ -165,7 +165,7 @@
                     <select
                       name="Lists"
                       @change="onChangeList($event)"
-                      class="form-control text-center flex justify-between w-full mr-2 whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic"
+                      class="form-control text-center flex justify-between w-full mr-2 whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic font-bold"
                       :value="listValue || '0'"
                     >
                       <option value="0">Lists</option>
@@ -179,7 +179,7 @@
                     <select
                       name="Score"
                       @change="onChangeScore($event)"
-                      class="form-control text-center flex justify-between w-full mx-2 whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic"
+                      class="form-control text-center flex justify-between w-full mx-2 whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic font-bold"
                       :value="scoreValue || '0'"
                     >
                       <option :value="0">Score</option>
@@ -195,7 +195,7 @@
                       <option :value="1">1</option>
                     </select>
                     <div
-                      class="episodes-watched text-left no-underline align-middle inline-block py-2 px-3 whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic h-10 w-full ml-2"
+                      class="episodes-watched text-left no-underline align-middle inline-block py-2 px-3 whitespace-nowrap bg-gray-button text-white border-none rounded shadow-profilePic h-10 w-full ml-2 font-bold"
                     >
                       Episodes:
                       <input
@@ -203,7 +203,7 @@
                         name="watched-episodes"
                         id="watched-episodes"
                         @change="onChangeEpisode($event)"
-                        class="w-12 bg-gray-button text-right mr-1"
+                        class="w-12 bg-gray-button text-right mr-1 font-bold"
                         :value="episodeValue || null"
                       />/
                       <span class="m-0 p-0 whitespace-nowrap">{{ anime.num_episodes }}</span>
