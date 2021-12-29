@@ -35,7 +35,7 @@
         <section v-if="user" class="anime-list relative pb-2">
           <router-link
             :to="{
-              name: 'Standard-List',
+              name: 'Standard List',
               params: { anime: JSON.stringify(suggestedAnime), type: 'suggestions' }
             }"
           >
@@ -60,7 +60,7 @@
         <section class="anime-list relative pb-2">
           <router-link
             :to="{
-              name: 'Standard-List',
+              name: 'Standard List',
               params: { anime: JSON.stringify(popularAnime), type: 'most-popular' }
             }"
           >
@@ -85,7 +85,7 @@
         <section class="shows pb-8 relative">
           <router-link
             :to="{
-              name: 'Standard-List',
+              name: 'Standard List',
               params: { anime: JSON.stringify(anime), type: 'top-airing' }
             }"
           >
@@ -186,7 +186,7 @@
         <section class="anime-list relative pb-2">
           <router-link
             :to="{
-              name: 'Standard-List',
+              name: 'Standard List',
               params: { anime: JSON.stringify(seasonAnime), type: 'this-season' }
             }"
           >
@@ -212,7 +212,7 @@
         <section class="anime-list relative pb-2">
           <router-link
             :to="{
-              name: 'Standard-List',
+              name: 'Standard List',
               params: { anime: JSON.stringify(topRatedAnime), type: 'top-rated' }
             }"
           >

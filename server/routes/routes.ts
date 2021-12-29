@@ -9,7 +9,7 @@ require('dotenv').config();
 router.get('/top-airing', (request: any, response: any) => {
   const config: {} = {
     method: 'get',
-    url: "https://api.myanimelist.net/v2/anime/ranking?ranking_type=airing&limit=10'",
+    url: "https://api.myanimelist.net/v2/anime/ranking?ranking_type=airing&limit=100'",
     headers: {
       'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID
     }
@@ -27,7 +27,7 @@ router.get('/top-airing', (request: any, response: any) => {
 router.get('/top-upcoming', (request: any, response: any) => {
   const config: {} = {
     method: 'get',
-    url: "https://api.myanimelist.net/v2/anime/ranking?ranking_type=upcoming&limit=10'",
+    url: "https://api.myanimelist.net/v2/anime/ranking?ranking_type=upcoming&limit=100'",
     headers: {
       'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID
     }
@@ -45,7 +45,7 @@ router.get('/top-upcoming', (request: any, response: any) => {
 router.get('/most-popular', (request: any, response: any) => {
   const config: {} = {
     method: 'get',
-    url: 'https://api.myanimelist.net/v2/anime/ranking?ranking_type=bypopularity&limit=6',
+    url: 'https://api.myanimelist.net/v2/anime/ranking?ranking_type=bypopularity&limit=100',
     headers: {
       'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID
     }
@@ -63,7 +63,7 @@ router.get('/most-popular', (request: any, response: any) => {
 router.get('/top-all', (request: any, response: any) => {
   const config: {} = {
     method: 'get',
-    url: "https://api.myanimelist.net/v2/anime/ranking?ranking_type=all&limit=10'",
+    url: "https://api.myanimelist.net/v2/anime/ranking?ranking_type=all&limit=100'",
     headers: {
       'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID
     }
@@ -81,7 +81,7 @@ router.get('/top-all', (request: any, response: any) => {
 router.get('/winter', (request: any, response: any) => {
   const config: {} = {
     method: 'get',
-    url: "https://api.myanimelist.net/v2/anime/season/2021/winter?limit=10'",
+    url: "https://api.myanimelist.net/v2/anime/season/2021/winter?&limit=100'",
     headers: {
       'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID
     }
@@ -99,7 +99,7 @@ router.get('/winter', (request: any, response: any) => {
 router.get('/spring', (request: any, response: any) => {
   const config: {} = {
     method: 'get',
-    url: "https://api.myanimelist.net/v2/anime/season/2021/spring?limit=10'",
+    url: "https://api.myanimelist.net/v2/anime/season/2021/spring?&limit=100'",
     headers: {
       'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID
     }
@@ -117,7 +117,7 @@ router.get('/spring', (request: any, response: any) => {
 router.get('/summer', (request: any, response: any) => {
   const config: {} = {
     method: 'get',
-    url: "https://api.myanimelist.net/v2/anime/season/2021/summer?limit=10'",
+    url: "https://api.myanimelist.net/v2/anime/season/2021/summer?&limit=100'",
     headers: {
       'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID
     }
@@ -135,7 +135,7 @@ router.get('/summer', (request: any, response: any) => {
 router.get('/fall', (request: any, response: any) => {
   const config: {} = {
     method: 'get',
-    url: "https://api.myanimelist.net/v2/anime/season/2021/fall?limit=10'",
+    url: "https://api.myanimelist.net/v2/anime/season/2021/fall?&limit=100'",
     headers: {
       'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID
     }
@@ -261,11 +261,31 @@ router.get('/user/:code/:verifier', (request: any, response: any) => {
   fetchUserDetails();
 });
 
+router.get('/user/:token', (request: any, response: any) => {
+  const { token } = request.params;
+  const config = {
+    method: 'get',
+    url: 'https://api.myanimelist.net/v2/users/@me?fields=anime_statistics',
+    headers: {
+      client_id: process.env.X_MAL_CLIENT_ID,
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  axios(config)
+    .then((userResponse: any) => {
+      response.json(JSON.stringify(userResponse.data));
+    })
+    .catch((error: Error) => {
+      console.log(error);
+    });
+});
+
 router.get('/suggested/:token', (request: any, response: any) => {
   const { token } = request.params;
   const config = {
     method: 'get',
-    url: 'https://api.myanimelist.net/v2/anime/suggestions?limit=6',
+    url: 'https://api.myanimelist.net/v2/anime/suggestions?&limit=100',
     headers: {
       client_id: process.env.X_MAL_CLIENT_ID,
       Authorization: `Bearer ${token}`
@@ -275,6 +295,26 @@ router.get('/suggested/:token', (request: any, response: any) => {
   axios(config)
     .then((suggestedResponse: any) => {
       response.json(JSON.stringify(suggestedResponse.data));
+    })
+    .catch((error: Error) => {
+      console.log(error);
+    });
+});
+
+router.get('/list/:token/:type', (request: any, response: any) => {
+  const { token } = request.params;
+  const { type } = request.params;
+  const config = {
+    method: 'get',
+    url: `https://api.myanimelist.net/v2/users/@me/animelist?fields=list_status&limit=500&status=${type}`,
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  axios(config)
+    .then((listResponse: any) => {
+      response.json(JSON.stringify(listResponse.data));
     })
     .catch((error: Error) => {
       console.log(error);

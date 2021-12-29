@@ -10,59 +10,39 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import('../views/About.vue')
   },
   {
     path: '/anime/:id/:title',
     name: 'Anime',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Anime-Page.vue')
+    component: () => import('../views/AnimePage.vue')
   },
   {
     path: '/search/:searchQuery',
     name: 'Search Results',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Search-Results.vue')
+    component: () => import('../views/SearchResults.vue')
   },
   {
     path: '/user/loggedIn',
     name: 'Connecting to My Anime List',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login-Splash.vue')
+    component: () => import('../views/LoginSplash.vue')
   },
   {
     path: '/profile/:userId:/:username',
     name: 'Profile',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Profile.vue')
+    component: () => import('../views/Profile.vue')
   },
   {
     path: '/list/:userId/:username/:type',
     name: 'List',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/List.vue')
+
+    component: () => import('../views/List.vue')
   },
   {
     path: '/list/:type',
-    name: 'Standard-List',
+    name: 'Standard List',
     props: true,
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Standard-List.vue')
+    component: () => import('../views/StandardList.vue')
   }
 ];
 
