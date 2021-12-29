@@ -31,6 +31,7 @@
               >
                 <button
                   class="text-center py-2 px-3 visible whitespace-nowrap uppercase bg-gray-button text-white border-none rounded shadow-profilePic tracking-wide font-bold"
+                  @click="viewProfileOnMAL"
                 >
                   View on MAL
                 </button>
@@ -159,7 +160,7 @@ export default defineComponent({
       window.open(`https://myanimelist.net/profile/${user.value?.username}`);
     };
 
-    return { user, userDetails };
+    return { user, userDetails, viewProfileOnMAL };
   }
 });
 </script>
