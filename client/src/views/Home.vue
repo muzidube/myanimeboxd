@@ -33,56 +33,77 @@
           </h1>
         </div>
         <section v-if="user" class="anime-list relative pb-2">
-          <h2
-            class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+          <router-link
+            :to="{
+              name: 'Standard-List',
+              params: { anime: JSON.stringify(suggestedAnime), type: 'suggestions' }
+            }"
           >
-            Suggested Anime...
-          </h2>
+            <h2
+              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+            >
+              Suggested Anime...
+            </h2>
+          </router-link>
           <ul
-            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
+            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap relative z-0 list-none justify-center"
           >
             <li
-              v-for="suggestedAnime in suggestedAnime"
+              v-for="suggestedAnime in suggestedAnime.slice(0, 6)"
               :key="suggestedAnime.node.id"
-              className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% md:ml-2.5 w-23% md:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
+              className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% xm:ml-2.5 w-23% ms:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
             >
-              <Anime2 :anime="suggestedAnime" />
+              <AnimeItem :anime="suggestedAnime" />
             </li>
           </ul>
         </section>
-        <section v-if="user" class="anime-list relative pb-2">
-          <h2
-            class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+        <section class="anime-list relative pb-2">
+          <router-link
+            :to="{
+              name: 'Standard-List',
+              params: { anime: JSON.stringify(popularAnime), type: 'most-popular' }
+            }"
           >
-            Most Popular Anime...
-          </h2>
+            <h2
+              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+            >
+              Most Popular Anime...
+            </h2>
+          </router-link>
           <ul
-            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
+            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap relative z-0 list-none justify-center"
           >
             <li
-              v-for="popularAnime in popularAnime"
+              v-for="popularAnime in popularAnime.slice(0, 6)"
               :key="popularAnime.node.id"
-              className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% md:ml-2.5 w-23% md:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
+              className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% xm:ml-2.5 w-23% ms:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
             >
-              <Anime2 :anime="popularAnime" />
+              <AnimeItem :anime="popularAnime" />
             </li>
           </ul>
         </section>
         <section class="shows pb-8 relative">
-          <h2
-            class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+          <router-link
+            :to="{
+              name: 'Standard-List',
+              params: { anime: JSON.stringify(anime), type: 'top-airing' }
+            }"
           >
-            Top Airing Anime...
-          </h2>
+            <h2
+              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+            >
+              Top Airing Anime...
+            </h2>
+          </router-link>
           <ul
-            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
+            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap relative z-0 list-none justify-center"
           >
             <li
-              v-for="anime in anime"
-              :key="anime.node.id"
-              className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% md:ml-2.5 w-23% md:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
+              v-for="topAiringAnime in topAiringAnime.slice(0, 6)"
+              :key="topAiringAnime.node.id"
+              className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% xm:ml-2.5 w-23% ms:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
             >
-              <Anime2 :anime="anime" />
+              <AnimeItem :anime="topAiringAnime" />
             </li>
           </ul>
         </section>
@@ -163,21 +184,54 @@
           </ul>
         </section>
         <section class="anime-list relative pb-2">
-          <h2
-            class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+          <router-link
+            :to="{
+              name: 'Standard-List',
+              params: { anime: JSON.stringify(seasonAnime), type: 'this-season' }
+            }"
           >
-            This Seasons Anime...
-          </h2>
+            <h2
+              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+            >
+              This Seasons Anime...
+            </h2>
+          </router-link>
 
           <ul
-            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap justify-between relative z-0 list-none"
+            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap relative z-0 list-none justify-center"
           >
             <li
-              v-for="seasonAnime in seasonAnime"
+              v-for="seasonAnime in seasonAnime.slice(0, 6)"
               :key="seasonAnime.node.id"
-              className="bottom-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% md:ml-2.5 w-23% md:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
+              className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% xm:ml-2.5 w-23% ms:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
             >
-              <Anime2 :anime="seasonAnime" />
+              <AnimeItem :anime="seasonAnime" />
+            </li>
+          </ul>
+        </section>
+        <section class="anime-list relative pb-2">
+          <router-link
+            :to="{
+              name: 'Standard-List',
+              params: { anime: JSON.stringify(topRatedAnime), type: 'top-rated' }
+            }"
+          >
+            <h2
+              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+            >
+              Top Rated Anime...
+            </h2>
+          </router-link>
+
+          <ul
+            class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap relative z-0 list-none justify-center"
+          >
+            <li
+              v-for="topRatedAnime in topRatedAnime.slice(0, 6)"
+              :key="topRatedAnime.node.id"
+              className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% xm:ml-2.5 w-23% ms:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
+            >
+              <AnimeItem :anime="topRatedAnime" />
             </li>
           </ul>
         </section>
@@ -191,41 +245,52 @@ import { defineComponent, ref } from 'vue';
 
 import Header from '../components/header/Header.vue';
 import Backdrop from '../components/home/Backdrop.vue';
-import Anime2 from '../components/home/Anime2.vue';
+import AnimeItem from '../components/home/AnimeItem.vue';
 import Anime from '../types/Anime';
 import { verifier } from '../code-thing';
 import isUser from '../context/user';
 import User from '../types/User';
 
 export default defineComponent({
-  components: { Header, Backdrop, Anime2 },
+  components: { Header, Backdrop, AnimeItem },
   setup() {
-    let bgArray: [];
     const suggestedAnime = ref<Anime[] | null>(null);
-    const loginUrl = ref<string | null>(null);
-    const animeBackground = ref<string>('');
-    const anime = ref<Anime[] | null>(null);
     const popularAnime = ref<Anime[] | null>(null);
-    const userCheck = ref(false);
-    const user = ref<User | null>(null);
+    const topAiringAnime = ref<Anime[] | null>(null);
+    const topRatedAnime = ref<Anime[] | null>(null);
     const seasonAnime = ref<Anime[] | null>(null);
 
-    const fetchTopAiringAnime = async () => {
+    const loginUrl = ref<string | null>(null);
+    const userCheck = ref(false);
+    const user = ref<User | null>(null);
+
+    let bgArray: [];
+    const animeBackground = ref<string>('');
+
+    isUser(userCheck);
+    if (userCheck.value) {
+      user.value = JSON.parse(localStorage.getItem('user') || '{}');
+    }
+    const fetchSuggestedAnime = async () => {
       try {
-        const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/top-airing`);
-        if (!response.ok) {
-          throw Error('No data available');
+        if (user.value!.access_token) {
+          const response = await fetch(
+            `${process.env.VUE_APP_BACKEND_URL}/suggested/${user.value!.access_token}`
+          );
+          if (!response.ok) {
+            throw Error('No data available');
+          }
+          const json = await response.json();
+          const jsonObj = await JSON.parse(json);
+          suggestedAnime.value = jsonObj.data;
         }
-        const json = await response.json();
-        const jsonObj = await JSON.parse(json);
-        anime.value = jsonObj.data.slice(0, 6);
       } catch (error) {
         error.value = error.message;
         console.log('Error: ', error.value);
       }
     };
 
-    fetchTopAiringAnime();
+    fetchSuggestedAnime();
 
     const fetchMostPopularAnime = async () => {
       try {
@@ -235,7 +300,7 @@ export default defineComponent({
         }
         const json = await response.json();
         const jsonObj = await JSON.parse(json);
-        popularAnime.value = jsonObj.data.slice(0, 6);
+        popularAnime.value = jsonObj.data;
       } catch (error) {
         error.value = error.message;
         console.log('Error: ', error.value);
@@ -243,6 +308,40 @@ export default defineComponent({
     };
 
     fetchMostPopularAnime();
+
+    const fetchTopAiringAnime = async () => {
+      try {
+        const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/top-airing`);
+        if (!response.ok) {
+          throw Error('No data available');
+        }
+        const json = await response.json();
+        const jsonObj = await JSON.parse(json);
+        topAiringAnime.value = jsonObj.data;
+      } catch (error) {
+        error.value = error.message;
+        console.log('Error: ', error.value);
+      }
+    };
+
+    fetchTopAiringAnime();
+
+    const fetchTopRatedAnime = async () => {
+      try {
+        const response = await fetch(`${process.env.VUE_APP_BACKEND_URL}/top-all`);
+        if (!response.ok) {
+          throw Error('No data available');
+        }
+        const json = await response.json();
+        const jsonObj = await JSON.parse(json);
+        topRatedAnime.value = jsonObj.data;
+      } catch (error) {
+        error.value = error.message;
+        console.log('Error: ', error.value);
+      }
+    };
+
+    fetchTopRatedAnime();
 
     const fetchThisSeasonAnime = async () => {
       try {
@@ -288,58 +387,15 @@ export default defineComponent({
       } else {
         localStorage.setItem('mal-verifier', verifier);
       }
-      window.open(
-        `https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.VUE_APP_X_MAL_CLIENT_ID}&code_challenge=${verifier}&state=RequestID42`,
-        '_self'
-      );
+      window.open(loginUrl.value!, '_self');
     };
 
-    isUser(userCheck);
-    if (userCheck.value) {
-      user.value = JSON.parse(localStorage.getItem('user') || '{}');
-    }
-
-    const fetchSuggestedAnime = async () => {
-      try {
-        if (user.value!.access_token) {
-          const response = await fetch(
-            `${process.env.VUE_APP_BACKEND_URL}/suggested/${user.value!.access_token}`
-          );
-          console.log('WHAT THE FUCK');
-          if (!response.ok) {
-            throw Error('No data available');
-          }
-          const json = await response.json();
-          const jsonObj = await JSON.parse(json);
-          suggestedAnime.value = jsonObj.data;
-        }
-      } catch (error) {
-        error.value = error.message;
-        console.log('Error: ', error.value);
-      }
-    };
-
-    fetchSuggestedAnime();
-
-    const fetchExampleWithParam = async () => {
-      try {
-        await fetch(`${process.env.VUE_APP_BACKEND_URL}/majig/thing`)
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
-      } catch (error) {
-        error.value = error.message;
-        console.log('Error from suggested: ', error.value);
-      }
-    };
-
-    fetchExampleWithParam();
     return {
-      anime,
-      seasonAnime,
       suggestedAnime,
       popularAnime,
+      topAiringAnime,
+      topRatedAnime,
+      seasonAnime,
       animeBackground,
       loginUrl,
       saveVerifier,

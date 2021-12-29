@@ -6,6 +6,11 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      screens: {
+        xm: '860px',
+        ms: '670px',
+        xs: '400px'
+      },
       colors: {
         white: '#ffffff',
         grey: {
@@ -39,7 +44,9 @@ module.exports = {
           highlights: '#456',
           resultBorder: '#2c3440',
           text: '#9ab',
-          text2: '#ddeeff'
+          button: '#678',
+          text2: '#ddeeff',
+          off: '#d8e0e8'
         },
         black: {
           background: '#14181c'
@@ -73,6 +80,7 @@ module.exports = {
         '150px': '150px',
         '141px': '141px',
         '120px': '120px',
+        '100px': '100px',
         '94px': '94px',
         '80px': '80px',
         '68px': '68px',
@@ -96,19 +104,24 @@ module.exports = {
         '150px': '150px',
         '140px': '140px',
         '120px': '120px',
-        '28px': '28px',
+        '80.45px': '80.45px',
+        '60px': '60px',
         '46px': '46px',
+        '28px': '28px',
         '12px': '12px'
       },
       maxWidth: {
         '6/12': '50%',
+        '6em': '6em',
         '1em': '1em',
         '1200px': '1200px',
         '950px': '950px',
         '600px': '600px',
+        '450px': '450px',
         '300px': '300px',
         '200px': '200px',
-        '150px': '150px'
+        '150px': '150px',
+        '90px': '90px'
       },
       maxHeight: {
         '1em': '1em',
@@ -166,7 +179,8 @@ module.exports = {
         'top-center': 'top center',
         'right-hero': 'right -200px top',
         'home-position': 'center 0 !important',
-        '50-50': '50% 50%'
+        '50-50': '50% 50%',
+        'stat-position': '.76923077rem 0'
       },
       backgroundImage: {
         'hero-gradient1':
@@ -179,14 +193,17 @@ module.exports = {
           'linear-gradient(90deg,#14181d 0,rgba(20,24,29,.986) .97%,rgba(20,24,29,.945) 2.07833333%,rgba(20,24,29,.883) 3.29666667%,rgba(20,24,29,.803) 4.60166667%,rgba(20,24,29,.711) 5.96666667%,rgba(20,24,29,.61) 7.365%,rgba(20,24,29,.504) 8.77166667%,rgba(20,24,29,.398) 10.16%,rgba(20,24,29,.296) 11.505%,rgba(20,24,29,.203) 12.78%,rgba(20,24,29,.122) 13.95833333%,rgba(20,24,29,.059) 15.01666667%,rgba(20,24,29,.016) 15.92833333%,rgba(20,24,29,0) 16.66666667%,rgba(20,24,29,0) 83.33333333%,rgba(20,24,29,.016) 84.07166667%,rgba(20,24,29,.059) 84.98333333%,rgba(20,24,29,.122) 86.04166667%,rgba(20,24,29,.203) 87.22%,rgba(20,24,29,.296) 88.495%,rgba(20,24,29,.398) 89.84%,rgba(20,24,29,.504) 91.22833333%,rgba(20,24,29,.61) 92.635%,rgba(20,24,29,.711) 94.03333333%,rgba(20,24,29,.803) 95.39833333%,rgba(20,24,29,.883) 96.70333333%,rgba(20,24,29,.945) 97.92166667%,rgba(20,24,29,.986) 99.03%,#14181d),linear-gradient(0deg,#14181d 0,#14181d 51.48148148%,rgba(20,24,29,.986) 53.63703704%,rgba(20,24,29,.945) 56.1%,rgba(20,24,29,.883) 58.80740741%,rgba(20,24,29,.803) 61.70740741%,rgba(20,24,29,.711) 64.74074074%,rgba(20,24,29,.61) 67.84814815%,rgba(20,24,29,.504) 70.97407407%,rgba(20,24,29,.398) 74.05925926%,rgba(20,24,29,.296) 77.04814815%,rgba(20,24,29,.203) 79.88148148%,rgba(20,24,29,.122) 82.5%,rgba(20,24,29,.059) 84.85185185%,rgba(20,24,29,.016) 76.87777778%,rgba(20,24,29,0) 88.51851852%)',
         'profile-gradient': 'linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4))',
         'frame-gradient':
-          'linear-gradient(90deg,hsla(0,0%,100%,0) 0,hsla(0,0%,100%,.5) 50%,hsla(0,0%,100%,0))'
+          'linear-gradient(90deg,hsla(0,0%,100%,0) 0,hsla(0,0%,100%,.5) 50%,hsla(0,0%,100%,0))',
+        'profile-stat': 'linear-gradient(90deg,#24303c 50%,rgba(36,48,60,0) 0)'
       },
       boxShadow: {
-        frame: 'inset 0 0 0 1px rgba(221,238,255,.35)'
+        frame: 'inset 0 0 0 1px rgba(221,238,255,.35)',
+        profilePic: 'inset 0 1px 0 hsla(0,0%,100%,.2)'
       },
       backgroundSize: {
         frame: '100% 1px',
-        'home-hero': '100% auto'
+        'home-hero': '100% auto',
+        'stat-size': '2px 1px'
       },
       zIndex: {
         1: '1'

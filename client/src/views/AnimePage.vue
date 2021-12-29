@@ -86,13 +86,8 @@
                       {{ `${anime.start_season.year} ` }}
                     </a>
                     <span class="bullet mx-3">·</span>
-                    Studio:
-                  </p>
-                  <div
-                    class="anime-studio text-lg leading-5 mb-1 font-black capitalize font-quicksand h-full hidden sm:flex sm:items-center sm:m-0 sm:ml-3"
-                  >
                     {{ anime.studios[0].name }}
-                  </div>
+                  </p>
                 </div>
                 <h4 class="-mt-1 font-quicksand tracking-widest uppercase font-normal mb-1">
                   Synopsis

@@ -19,7 +19,10 @@
               Sign Out
             </button>
             <div class="flex items-center cursor-pointer text-black">
-              <router-link :to="'/profile/' + user.id" class="min-w-28px min-h-28px">
+              <router-link
+                :to="'/profile/' + user.id + '/' + user.username"
+                class="min-w-28px min-h-28px"
+              >
                 <span class="min-w-28px w-28px h-28px box-border text-white">
                   <div class="block m-0 w-full h-full">
                     <span
