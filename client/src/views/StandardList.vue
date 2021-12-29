@@ -47,7 +47,6 @@ export default defineComponent({
     const route = useRoute();
 
     const { type } = route.params;
-    console.log(JSON.parse(props.anime));
     listAnime.value = JSON.parse(props.anime);
 
     return { type, listAnime };

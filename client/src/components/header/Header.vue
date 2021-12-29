@@ -118,15 +118,13 @@ export default defineComponent({
       } else {
         localStorage.setItem('mal-verifier', props.verifier);
       }
-      window.open(
-        `https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.VUE_APP_X_MAL_CLIENT_ID}&code_challenge=${props.verifier}&state=RequestID42`,
-        '_self'
-      );
+      window.open(props.loginUrl, '_self');
     };
 
     const handleLogout = () => {
       if (localStorage.getItem('user')) {
         localStorage.removeItem('user');
+        localStorage.removeItem('mal-verifier');
       }
       router.push('/');
     };

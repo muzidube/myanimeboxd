@@ -67,7 +67,6 @@ export default defineComponent({
           }
           const json = await response.json();
           const jsonObj = await JSON.parse(json);
-          console.log(jsonObj);
           listAnime.value = jsonObj.data;
         }
       } catch (error) {

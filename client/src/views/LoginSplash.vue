@@ -1,7 +1,5 @@
 <template>
   <Header />
-  <Backdrop :animeBackground="animeBackground" />
-
   <div class="site-body pt-15%">
     <div class="content-wrap relative py-0 w-auto my-0 mx-auto px-4 lg:px-0 lg:w-950px font-normal">
       <div class="homepage-welcome mb-8 mt-18% text-left text-xl">
@@ -23,15 +21,12 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import Header from '../components/header/Header.vue';
-import Backdrop from '../components/home/Backdrop.vue';
 import User from '../types/User';
 
 export default defineComponent({
-  components: { Header, Backdrop },
+  components: { Header },
   setup() {
-    let bgArray: [];
     const user = ref<User | null>(null);
-    const animeBackground = ref<string>('');
     const verifier = localStorage.getItem('mal-verifier');
 
     const getUser = async () => {
@@ -59,25 +54,7 @@ export default defineComponent({
 
     getUser();
 
-    const getHomeBG = async () => {
-      try {
-        await fetch(`${process.env.VUE_APP_BACKEND_URL}/movieAPI/bg`)
-          .then((res) => res.json())
-          .then((res) => JSON.parse(res))
-          .then((data) => {
-            bgArray = data.map((a: any) => a.backdrop_path);
-          });
-      } catch (error) {
-        error.value = error.message;
-        console.log('Error: ', error.value);
-      }
-      const animeBackgroundUrl = await bgArray[Math.floor(Math.random() * bgArray.length)];
-      animeBackground.value = `https://image.tmdb.org/t/p/w1920_and_h1080_multi_faces${animeBackgroundUrl}`;
-    };
-
-    getHomeBG();
-
-    return { animeBackground, user };
+    return { user };
   }
 });
 </script>
