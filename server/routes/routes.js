@@ -282,9 +282,70 @@ router.get('/list/:token/:type', (request, response) => {
         console.log(error);
     });
 });
-router.get('/majig/thing', (request, response) => {
-    const testParameter = request.params.thing;
-    response.json(`This test will work ${testParameter}`);
+router.get('/check-lists/:token', (request, response) => {
+    const { token } = request.params;
+    const config = {
+        method: 'get',
+        url: 'https://api.myanimelist.net/v2/users/@me/animelist?fields=list_status&limit=500',
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+    axios(config)
+        .then((checkListsResponse) => {
+        response.json(JSON.stringify(checkListsResponse.data));
+    })
+        .catch((error) => {
+        console.log(error);
+    });
+});
+router.get('/user-anime/:animeID/:token/:status/:score/:episodes', (request, response) => {
+    const id = request.params.animeID;
+    const { token } = request.params;
+    const { status } = request.params;
+    const { score } = request.params;
+    const { episodes } = request.params;
+    const data = qs.stringify({
+        status,
+        score,
+        num_watched_episodes: episodes
+    });
+    const config = {
+        method: 'put',
+        url: `https://api.myanimelist.net/v2/anime/${id}/my_list_status?`,
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data
+    };
+    axios(config)
+        .then((submitResponse) => {
+        response.json(JSON.stringify(submitResponse.data));
+    })
+        .catch((error) => {
+        console.log(error);
+        response.json(JSON.parse('Error updating list.'));
+    });
+});
+router.get('/user-anime/delete/:animeID/:token', (request, response) => {
+    const id = request.params.animeID;
+    const { token } = request.params;
+    const config = {
+        method: 'delete',
+        url: `https://api.myanimelist.net/v2/anime/${id}/my_list_status`,
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+    axios(config)
+        .then((deleteResponse) => {
+        response.json(JSON.stringify(deleteResponse.data));
+    })
+        .catch((error) => {
+        console.log(error);
+        response.json(JSON.parse('Error updating list.'));
+    });
 });
 module.exports = router;
 //# sourceMappingURL=routes.js.map

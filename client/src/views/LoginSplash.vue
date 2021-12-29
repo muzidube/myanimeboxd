@@ -44,7 +44,7 @@ export default defineComponent({
           const json = await response.json();
           user.value = json;
           localStorage.setItem('user', JSON.stringify(json));
-          window.open('http://localhost:8080/', '_self');
+          window.open(`${process.env.VUE_APP_HOMEPAGE}`, '_self');
         }
       } catch (error) {
         error.value = error.message;

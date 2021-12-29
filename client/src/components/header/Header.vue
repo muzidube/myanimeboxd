@@ -88,14 +88,16 @@ import { useRouter } from 'vue-router';
 import SearchBar from './SearchBar.vue';
 import isUser from '../../context/user';
 import User from '../../types/User';
+import { verifier } from '../../code-thing';
 
 export default defineComponent({
   components: { SearchBar },
-  props: ['loginUrl', 'verifier'],
-  setup(props) {
+  setup() {
     const router = useRouter();
     const userCheck = ref(false);
     const user = ref<User | null>(null);
+
+    const loginUrl = ref<string | null>(null);
 
     const toggleSearchBar = () => {
       const searchBar = document.querySelector('.anime-searchbar-form') || null;
@@ -111,14 +113,16 @@ export default defineComponent({
       user.value = JSON.parse(localStorage.getItem('user') || '{}');
     }
 
+    loginUrl.value = `https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${process.env.VUE_APP_X_MAL_CLIENT_ID}&code_challenge=${verifier}&state=RequestID42`;
+
     const saveVerifier = () => {
       if (localStorage.getItem('mal-verifier')) {
         localStorage.removeItem('mal-verifier');
-        localStorage.setItem('mal-verifier', props.verifier);
+        localStorage.setItem('mal-verifier', verifier);
       } else {
-        localStorage.setItem('mal-verifier', props.verifier);
+        localStorage.setItem('mal-verifier', verifier);
       }
-      window.open(props.loginUrl, '_self');
+      window.open(loginUrl.value!, '_self');
     };
 
     const handleLogout = () => {
