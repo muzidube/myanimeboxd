@@ -326,9 +326,9 @@ export default defineComponent({
 
     const checkAnime = async () => {
       try {
-        if (user.value!.access_token) {
+        if (user.value?.access_token) {
           const response = await fetch(
-            `${process.env.VUE_APP_BACKEND_URL}/check-lists/${user.value!.access_token}`
+            `${process.env.VUE_APP_BACKEND_URL}/check-lists/${user.value?.access_token}`
           );
           if (!response.ok) {
             throw Error('No data available');
@@ -382,9 +382,7 @@ export default defineComponent({
         submitMessage.value = null;
         if (listValue.value === 'delete') {
           const response = await fetch(
-            `${process.env.VUE_APP_BACKEND_URL}/user-anime/delete/${route.params.id}/${
-              user.value!.access_token
-            }`
+            `${process.env.VUE_APP_BACKEND_URL}/user-anime/delete/${route.params.id}/${user.value?.access_token}`
           );
           if (!response.ok) {
             throw Error('No data available');
@@ -395,9 +393,7 @@ export default defineComponent({
           submitMessage.value = 'Succesfully deleted.';
         } else if (listValue.value && scoreValue.value && episodeValue.value) {
           const response = await fetch(
-            `${process.env.VUE_APP_BACKEND_URL}/user-anime/${route.params.id}/${
-              user.value!.access_token
-            }/${listValue.value}/${scoreValue.value}/${episodeValue.value}`
+            `${process.env.VUE_APP_BACKEND_URL}/user-anime/${route.params.id}/${user.value?.access_token}/${listValue.value}/${scoreValue.value}/${episodeValue.value}`
           );
           if (!response.ok) {
             throw Error('No data available');

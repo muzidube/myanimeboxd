@@ -136,9 +136,9 @@ export default defineComponent({
 
     const fetchUserDetails = async () => {
       try {
-        if (user.value!.access_token) {
+        if (user.value?.access_token) {
           const response = await fetch(
-            `${process.env.VUE_APP_BACKEND_URL}/user/${user.value!.access_token}`
+            `${process.env.VUE_APP_BACKEND_URL}/user/${user.value?.access_token}`
           );
           if (!response.ok) {
             throw Error('No data available');

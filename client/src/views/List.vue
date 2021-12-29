@@ -58,9 +58,9 @@ export default defineComponent({
 
     const fetchListAnime = async () => {
       try {
-        if (user.value!.access_token) {
+        if (user.value?.access_token) {
           const response = await fetch(
-            `${process.env.VUE_APP_BACKEND_URL}/list/${user.value!.access_token}/${type}`
+            `${process.env.VUE_APP_BACKEND_URL}/list/${user.value?.access_token}/${type}`
           );
           if (!response.ok) {
             throw Error('No data available');

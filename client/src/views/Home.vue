@@ -49,7 +49,7 @@
             class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap relative z-0 list-none justify-center"
           >
             <li
-              v-for="suggestedAnime in suggestedAnime.slice(0, 6)"
+              v-for="suggestedAnime in suggestedAnime?.slice(0, 6)"
               :key="suggestedAnime.node.id"
               className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% xm:ml-2.5 w-23% ms:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
             >
@@ -74,7 +74,7 @@
             class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap relative z-0 list-none justify-center"
           >
             <li
-              v-for="popularAnime in popularAnime.slice(0, 6)"
+              v-for="popularAnime in popularAnime?.slice(0, 6)"
               :key="popularAnime.node.id"
               className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% xm:ml-2.5 w-23% ms:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
             >
@@ -99,7 +99,7 @@
             class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap relative z-0 list-none justify-center"
           >
             <li
-              v-for="topAiringAnime in topAiringAnime.slice(0, 6)"
+              v-for="topAiringAnime in topAiringAnime?.slice(0, 6)"
               :key="topAiringAnime.node.id"
               className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% xm:ml-2.5 w-23% ms:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
             >
@@ -201,7 +201,7 @@
             class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap relative z-0 list-none justify-center"
           >
             <li
-              v-for="seasonAnime in seasonAnime.slice(0, 6)"
+              v-for="seasonAnime in seasonAnime?.slice(0, 6)"
               :key="seasonAnime.node.id"
               className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% xm:ml-2.5 w-23% ms:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
             >
@@ -227,7 +227,7 @@
             class="anime-list overflow-hidden h-full -ml-2% flex flex-wrap relative z-0 list-none justify-center"
           >
             <li
-              v-for="topRatedAnime in topRatedAnime.slice(0, 6)"
+              v-for="topRatedAnime in topRatedAnime?.slice(0, 6)"
               :key="topRatedAnime.node.id"
               className="top-row-anime media-item h-full min-h-full my-0 ml-2% mb-2% xm:ml-2.5 w-23% ms:w-150px bg-black-background mt-0 border-none shadow-none rounded-lg overflow-hidden relative flex flex-wrap content-start whitespace-nowrap"
             >
@@ -273,9 +273,9 @@ export default defineComponent({
     }
     const fetchSuggestedAnime = async () => {
       try {
-        if (user.value!.access_token) {
+        if (user.value?.access_token) {
           const response = await fetch(
-            `${process.env.VUE_APP_BACKEND_URL}/suggested/${user.value!.access_token}`
+            `${process.env.VUE_APP_BACKEND_URL}/suggested/${user.value?.access_token}`
           );
           if (!response.ok) {
             throw Error('No data available');
