@@ -155,6 +155,10 @@ export default defineComponent({
 
     fetchUserDetails();
 
+    const viewProfileOnMAL = () => {
+      window.open(`https://myanimelist.net/profile/${user.value?.username}`);
+    };
+
     return { user, userDetails };
   }
 });
