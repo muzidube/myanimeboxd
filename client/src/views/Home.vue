@@ -40,7 +40,7 @@
             }"
           >
             <h2
-              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base hover:underline"
             >
               Suggested Anime...
             </h2>
@@ -65,7 +65,7 @@
             }"
           >
             <h2
-              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base hover:underline"
             >
               Most Popular Anime...
             </h2>
@@ -86,11 +86,11 @@
           <router-link
             :to="{
               name: 'Standard List',
-              params: { anime: JSON.stringify(anime), type: 'top-airing' }
+              params: { anime: JSON.stringify(topAiringAnime), type: 'top-airing' }
             }"
           >
             <h2
-              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base hover:underline"
             >
               Top Airing Anime...
             </h2>
@@ -191,7 +191,7 @@
             }"
           >
             <h2
-              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base hover:underline"
             >
               This Seasons Anime...
             </h2>
@@ -217,7 +217,7 @@
             }"
           >
             <h2
-              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base"
+              class="section-heading tracking-wider border-b border-gray-highlights mb-2.5 pb-1.5 uppercase text-base hover:underline"
             >
               Top Rated Anime...
             </h2>
